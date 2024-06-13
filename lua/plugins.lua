@@ -1,5 +1,6 @@
 return {
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
+  'nvim-lua/plenary.nvim', -- lua functions that many plugins use
+  'christoomey/vim-tmux-navigator', -- tmux & split window navigation
   { import = 'plugins' },
 }

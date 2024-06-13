@@ -23,6 +23,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
         return vim.fn.executable 'make' == 1
       end,
     },
+      "folke/todo-comments.nvim",
     { 'nvim-telescope/telescope-ui-select.nvim' }, -- Useful for getting pretty icons, but requires a Nerd Font.
     {
       'nvim-tree/nvim-web-devicons',
@@ -51,16 +52,23 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
+    local actions = require 'telescope.actions'
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
       --
-      -- defaults = {
-      --   mappings = {
-      --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-      --   },
-      -- },
       -- pickers = {}
+      defaults = {
+        file_ignore_patterns = { 'node_modules' },
+        path_display = { 'smart' },
+        mappings = {
+          i = {
+            ['<C-k>'] = actions.move_selection_previous, -- move to prev result
+            ['<C-j>'] = actions.move_selection_next, -- move to prev result
+            ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist, -- move to prev result
+          },
+        },
+      },
       extensions = {
         ['ui-select'] = { require('telescope.themes').get_dropdown() },
       },
@@ -102,7 +110,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, {
       desc = '[ ] Find existing buffers',
     })
-
+  vim.keymap.set('n', '<leader>st', "<cmd>TodoTelescope<cr>", {desc = '[S]earch [T]odo'})
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
