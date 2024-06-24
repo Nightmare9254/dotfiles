@@ -31,7 +31,6 @@ return {
         'html',
         'cssls',
         'volar',
-        'htmx',
         'tailwindcss',
         'lua_ls',
         'graphql',
