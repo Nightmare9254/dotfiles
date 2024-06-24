@@ -101,9 +101,17 @@ return {
       end,
       ['eslint'] = function()
         lspconfig['eslint'].setup {
+          capabilities = capabilities,
           settings = {
             autoFixOnSave = true,
           },
+        }
+      end,
+
+      ['volar'] = function()
+        lspconfig['volar'].setup {
+          capabilities = capabilities,
+          filetypes = { 'typescript', 'vue' },
         }
       end,
 
