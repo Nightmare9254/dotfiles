@@ -23,7 +23,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
         return vim.fn.executable 'make' == 1
       end,
     },
-      "folke/todo-comments.nvim",
+    'folke/todo-comments.nvim',
     { 'nvim-telescope/telescope-ui-select.nvim' }, -- Useful for getting pretty icons, but requires a Nerd Font.
     {
       'nvim-tree/nvim-web-devicons',
@@ -59,7 +59,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --
       -- pickers = {}
       defaults = {
-        file_ignore_patterns = { 'node_modules' },
+        file_ignore_patterns = { 'node_modules', 'pnpm-lock.yaml', '.next', 'package-lock.json', 'tsconfig.tsbuildinfo' },
         path_display = { 'smart' },
         mappings = {
           i = {
@@ -110,7 +110,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, {
       desc = '[ ] Find existing buffers',
     })
-  vim.keymap.set('n', '<leader>st', "<cmd>TodoTelescope<cr>", {desc = '[S]earch [T]odo'})
+    vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo' })
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
