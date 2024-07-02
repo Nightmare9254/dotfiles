@@ -3,7 +3,6 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     local lualine = require 'lualine'
-    local lazy_status = require 'lazy.status' -- to configure lazy pending updates count
 
     local C = require('catppuccin.palettes').get_palette 'mocha'
     local O = require('catppuccin').options
@@ -43,10 +42,34 @@ return {
       },
     }
 
+    local harpoon = require 'harpoon'
+    local function harpoon_file()
+      local marks_length = harpoon:list():length()
+      local current_file_path = vim.fn.fnamemodify(vim.fn.expand '%:p', ':.')
+
+      local mark_idx = '-'
+      for index = 1, marks_length do
+        local harpoon_file_path = harpoon:list():get(index).value
+
+        if current_file_path == harpoon_file_path then
+          mark_idx = tostring(index)
+        end
+      end
+      return string.format('↗ %s/%d', mark_idx, marks_length)
+    end
+
     -- configure lualine with modified theme
     lualine.setup {
       options = {
         theme = my_lualine_theme,
+      },
+      sections = {
+        lualine_b = {
+          { 'branch', icon = '' },
+          harpoon_file,
+          'diff',
+          'diagnostics',
+        },
       },
     }
   end,

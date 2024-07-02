@@ -53,11 +53,24 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     local actions = require 'telescope.actions'
+
+    local state = require 'telescope.state'
+    local action_state = require 'telescope.actions.state'
+
+    local slow_scroll = function(prompt_bufnr, direction)
+      local previewer = action_state.get_current_picker(prompt_bufnr).previewer
+      local status = state.get_status(prompt_bufnr)
+
+      -- Check if we actually have a previewer and a preview window
+      if type(previewer) ~= 'table' or previewer.scroll_fn == nil or status.preview_win == nil then
+        return
+      end
+
+      previewer:scroll_fn(1 * direction)
+    end
+
     require('telescope').setup {
-      -- You can put your default mappings / updates / etc. in here
-      --  All the info you're looking for is in `:help telescope.setup()`
-      --
-      -- pickers = {}
+
       defaults = {
         file_ignore_patterns = { 'node_modules', 'pnpm-lock.yaml', '.next', 'package-lock.json', 'tsconfig.tsbuildinfo' },
         path_display = { 'smart' },
@@ -66,6 +79,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
             ['<C-k>'] = actions.move_selection_previous, -- move to prev result
             ['<C-j>'] = actions.move_selection_next, -- move to prev result
             ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist, -- move to prev result
+            ['<C-d>'] = function(bufnr)
+              slow_scroll(bufnr, 1) -- scrols preview window of current search file
+            end,
+            ['<C-s>'] = function(bufnr)
+              slow_scroll(bufnr, -1)
+            end,
           },
         },
       },
