@@ -6,7 +6,7 @@ return {
     opts = {
       symbol = '│',
       options = { try_as_border = true },
-      draw = { animation = require('mini.indentscope').gen_animation.linear { eassing = 'in', duration = 10, unit = 'step' } },
+      -- draw = { animation = require('mini.indentscope').gen_animation.none() },
     },
     init = function()
       local macchiato = require('catppuccin.palettes').get_palette 'mocha'
