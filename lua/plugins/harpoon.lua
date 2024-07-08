@@ -63,7 +63,9 @@ return {
               local state = require 'telescope.actions.state'
               local selected_entry = state.get_selected_entry()
               local current_picker = state.get_current_picker(prompt_bufnr)
-
+              if selected_entry == nil then
+                return
+              end
               table.remove(harpoon_files.items, selected_entry.index)
               current_picker:refresh(finder())
             end)
