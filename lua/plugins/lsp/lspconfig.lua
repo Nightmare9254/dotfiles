@@ -1,3 +1,5 @@
+-- im surender
+
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
@@ -41,9 +43,6 @@ return {
         opts.desc = 'Show LSP type definitions'
         keymap.set('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', opts) -- show lsp type definitions
 
-        opts.desc = 'See available code actions'
-        keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-
         opts.desc = 'Smart rename'
         keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts) -- smart rename
 
@@ -64,6 +63,9 @@ return {
 
         opts.desc = 'Restart LSP'
         keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
+
+        opts.desc = 'See available code actions'
+        keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
       end,
     })
 
@@ -112,6 +114,12 @@ return {
         lspconfig['volar'].setup {
           capabilities = capabilities,
           filetypes = { 'typescript', 'vue' },
+        }
+      end,
+      ['pylsp'] = function()
+        lspconfig['pylsp'].setup {
+          capabilities = capabilities,
+          filetypes = { 'python' },
         }
       end,
       ['lua_ls'] = function()

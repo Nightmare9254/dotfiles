@@ -155,6 +155,8 @@ vim.g.loaded_netrwPlugin = 1
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- vim.opt.spelllang = 'en, pl'
+-- vim.opt.spell = true
 -- Disable autosave swapfile
 vim.opt.swapfile = false
 
@@ -180,7 +182,11 @@ require 'autocmd'
 --    :Lazy update
 --
 -- NOTE: Here is where you install your plugins.
-require('lazy').setup({ { import = 'plugins' }, { import = 'plugins.lsp' } }, {
+require('lazy').setup({
+  { import = 'plugins' },
+  { import = 'plugins.lsp' },
+  { import = 'plugins.python' },
+}, {
   checker = { enabled = true },
 })
 

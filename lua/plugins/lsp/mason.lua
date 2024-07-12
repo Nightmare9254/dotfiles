@@ -38,15 +38,23 @@ return {
         'prismals',
         'eslint',
         'golangci_lint_ls',
+        'pylsp',
       },
     }
 
     mason_tool_installer.setup {
       ensure_installed = {
         'prettierd', -- prettier formatter
-        'stylua', -- lua formatter
         'eslint_d',
+        'stylua', -- lua formatter
+        'black', -- python formatter
+        'mypy',
+        'pylint',
+        'flake8',
+        'debugpy',
         'cspell',
+        'misspell',
+        'codespell',
       },
     }
   end,

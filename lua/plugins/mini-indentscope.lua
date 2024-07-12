@@ -9,7 +9,7 @@ return {
       -- draw = { animation = require('mini.indentscope').gen_animation.none() },
     },
     init = function()
-      local macchiato = require('catppuccin.palettes').get_palette 'mocha'
+      local mocha = require('catppuccin.palettes').get_palette 'mocha'
       vim.api.nvim_create_autocmd('FileType', {
         pattern = {
           'help',
@@ -22,7 +22,7 @@ return {
         end,
       })
 
-      vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = macchiato.mauve })
+      vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = mocha.mauve })
     end,
   },
 }
