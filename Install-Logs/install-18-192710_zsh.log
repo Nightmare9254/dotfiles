@@ -1,0 +1,130 @@
+[33m[NOTE](B[m Installing eza ...
+Last metadata expiration check: 0:26:50 ago on czw, 18 lip 2024, 19:00:21.
+Last metadata expiration check: 0:26:50 ago on czw, 18 lip 2024, 19:00:21.
+Dependencies resolved.
+Dependencies resolved.
+================================================================================
+ Package      Architecture    Version                    Repository        Size
+================================================================================
+Installing:
+ eza          x86_64          0.18.11-1.fc40             updates          772 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+================================================================================
+ Package      Architecture    Version                    Repository        Size
+================================================================================
+Installing:
+ eza          x86_64          0.18.11-1.fc40             updates          772 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 772 k
+Total download size: 772 k
+Installed size: 1.7 M
+Installed size: 1.7 M
+Downloading Packages:
+Downloading Packages:
+eza-0.18.11-1.fc40.x86_64.rpm                   1.9 MB/s | 772 kB     00:00    
+eza-0.18.11-1.fc40.x86_64.rpm                   1.9 MB/s | 772 kB     00:00    
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Total                                           1.2 MB/s | 772 kB     00:00     
+Total                                           1.2 MB/s | 772 kB     00:00     
+Running transaction check
+Running transaction check
+Transaction check succeeded.
+Transaction check succeeded.
+Running transaction test
+Running transaction test
+Transaction test succeeded.
+Transaction test succeeded.
+Running transaction
+Running transaction
+  Preparing        :                                                        1/1  Preparing        :                                                        1/1 
+  Installing       : eza-0.18.11-1.fc40.x86_64                              1/1 
+  Installing       : eza-0.18.11-1.fc40.x86_64                              1/1 
+  Running scriptlet: eza-0.18.11-1.fc40.x86_64                              1/1 
+  Running scriptlet: eza-0.18.11-1.fc40.x86_64                              1/1 
+
+Installed:
+  eza-0.18.11-1.fc40.x86_64                                                     
+
+Complete!
+ 
+
+Installed:
+  eza-0.18.11-1.fc40.x86_64                                                     
+
+Complete!
+[1A[K[32m[OK](B[m eza was installed.
+[33m[NOTE](B[m Installing fzf ...
+Last metadata expiration check: 0:26:53 ago on czw, 18 lip 2024, 19:00:21.
+Last metadata expiration check: 0:26:53 ago on czw, 18 lip 2024, 19:00:21.
+Dependencies resolved.
+Dependencies resolved.
+================================================================================
+ Package       Architecture     Version                  Repository        Size
+================================================================================
+Installing:
+ fzf           x86_64           0.44.1-3.fc40            fedora           1.3 M
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+================================================================================
+ Package       Architecture     Version                  Repository        Size
+================================================================================
+Installing:
+ fzf           x86_64           0.44.1-3.fc40            fedora           1.3 M
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 1.3 M
+Total download size: 1.3 M
+Installed size: 3.7 M
+Installed size: 3.7 M
+Downloading Packages:
+Downloading Packages:
+fzf-0.44.1-3.fc40.x86_64.rpm                    3.8 MB/s | 1.3 MB     00:00    
+fzf-0.44.1-3.fc40.x86_64.rpm                    3.8 MB/s | 1.3 MB     00:00    
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Total                                           2.4 MB/s | 1.3 MB     00:00     
+Total                                           2.4 MB/s | 1.3 MB     00:00     
+Running transaction check
+Running transaction check
+Transaction check succeeded.
+Transaction check succeeded.
+Running transaction test
+Running transaction test
+Transaction test succeeded.
+Transaction test succeeded.
+Running transaction
+Running transaction
+  Preparing        :                                                        1/1  Preparing        :                                                        1/1 
+  Installing       : fzf-0.44.1-3.fc40.x86_64                               1/1 
+  Installing       : fzf-0.44.1-3.fc40.x86_64                               1/1 
+  Running scriptlet: fzf-0.44.1-3.fc40.x86_64                               1/1 
+  Running scriptlet: fzf-0.44.1-3.fc40.x86_64                               1/1 
+
+Installed:
+  fzf-0.44.1-3.fc40.x86_64                                                      
+
+Complete!
+ 
+
+Installed:
+  fzf-0.44.1-3.fc40.x86_64                                                      
+
+Complete!
+[1A[K[32m[OK](B[m fzf was installed.
+[32m[OK](B[m zsh is already installed. Skipping...
+[32m[OK](B[m util-linux is already installed. Skipping...
