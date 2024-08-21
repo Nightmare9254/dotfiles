@@ -42,6 +42,11 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+# ---- Load shh-agent for git authentications
+eval `keychain --agents ssh --eval id_ed25519`
+
 # --- Setup volta
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+export PATH=$PATH:/home/nightmare/.spicetify
