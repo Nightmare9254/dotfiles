@@ -17,17 +17,17 @@ return {
     controls = {
       element = 'repl',
       enabled = false,
-      icons = {
-        disconnect = 'x',
-        pause = '',
-        play = '',
-        run_last = '',
-        step_back = '',
-        step_into = '',
-        step_out = '',
-        step_over = '',
-        terminate = '',
-      },
+      -- icons = {
+      --   disconnect = 'x',
+      --   pause = '',
+      --   play = '',
+      --   run_last = '',
+      --   step_back = '',
+      --   step_into = '',
+      --   step_out = '',
+      --   step_over = '',
+      --   terminate = '',
+      -- },
     },
     element_mappings = {},
     expand_lines = true,
@@ -38,11 +38,11 @@ return {
       },
     },
     force_buffers = true,
-    icons = {
-      collapsed = '',
-      current_frame = '',
-      expanded = '',
-    },
+    -- icons = {
+    --   collapsed = '',
+    --   current_frame = '',
+    --   expanded = '',
+    -- },
     layouts = {
       {
         elements = {
@@ -88,29 +88,21 @@ return {
       max_value_lines = 100,
     },
   },
-  config = function(_, opts)
+  config = function()
     local dap = require 'dap'
-    require('dapui').setup(opts)
+    local dapui = require 'dapui'
 
-    dap.listeners.after.event_initialized['dapui_config'] = function()
-      require('dapui').open()
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
     end
-
-    dap.listeners.before.event_terminated['dapui_config'] = function()
-      -- Commented to prevent DAP UI from closing when unit tests finish
-      -- require('dapui').close()
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
     end
-
-    dap.listeners.before.event_exited['dapui_config'] = function()
-      -- Commented to prevent DAP UI from closing when unit tests finish
-      -- require('dapui').close()
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
     end
-
-    -- Add dap configurations based on your language/adapter settings
-    -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
-    -- dap.configurations.xxxxxxxxxx = {
-    --   {
-    --   },
-    -- }
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
   end,
 }

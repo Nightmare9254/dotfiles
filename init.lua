@@ -185,6 +185,7 @@ require 'autocmd'
 require('lazy').setup({
   { import = 'plugins' },
   { import = 'plugins.lsp' },
+  { import = 'plugins.dap' },
   { import = 'plugins.python' },
 }, {
   checker = { enabled = true },

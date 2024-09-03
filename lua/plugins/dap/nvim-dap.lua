@@ -1,14 +1,19 @@
 return {
   'mfussenegger/nvim-dap',
+  dependencies = {
+    'rcarriga/nvim-dap-ui',
+  },
   config = function()
     local keymap = vim.keymap -- for conciseness
+    local dap = require 'dap'
 
-    keymap.set('n', '<leader>db', "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = 'Ad[D] [Breakpoint]' })
+    keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Ad[D] [B]reakpoint' })
+    keymap.set('n', '<leader>dc', dap.continue, { desc = '[D]ap [C]ontinue' })
+
     keymap.set('n', '<leader>bc', "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
     keymap.set('n', '<leader>bl', "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
     keymap.set('n', '<leader>br', "<cmd>lua require'dap'.clear_breakpoints()<cr>")
     keymap.set('n', '<leader>ba', '<cmd>Telescope dap list_breakpoints<cr>')
-    keymap.set('n', '<leader>dc', "<cmd>lua require'dap'.continue()<cr>")
     keymap.set('n', '<leader>dj', "<cmd>lua require'dap'.step_over()<cr>")
     keymap.set('n', '<leader>dk', "<cmd>lua require'dap'.step_into()<cr>")
     keymap.set('n', '<leader>do', "<cmd>lua require'dap'.step_out()<cr>")
