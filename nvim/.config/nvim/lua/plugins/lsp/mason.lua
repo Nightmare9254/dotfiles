@@ -27,7 +27,7 @@ return {
     mason_lspconfig.setup {
       -- list of servers for mason to install
       ensure_installed = {
-        'tsserver',
+        'ts_ls',
         'html',
         'cssls',
         'volar',
@@ -37,7 +37,7 @@ return {
         'emmet_ls',
         'prismals',
         'eslint',
-        'golangci_lint_ls',
+        -- 'golangci_lint_ls',
       },
     }
 
