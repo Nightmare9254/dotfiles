@@ -45,6 +45,15 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # ---- Load shh-agent for git authentications
 eval `keychain --agents ssh --eval id_ed25519`
 
+alias pn="pnpm"
+alias pni="pnpm run install"
+alias pnd="pnpm run dev"
+alias npd="npm run dev"
+alias npi="npm install"
+alias nps="npm run start"
+alias npb="npm run build"
+alias npp="npm run prod"
+
 # --- Setup volta
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
