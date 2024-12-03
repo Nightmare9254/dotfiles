@@ -22,15 +22,41 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- Create the autocommand for saving the current buffer
+-- Utility function to check if any file in a list exists in the current working directory
+local function files_exists_in_dir(filenames)
+  local cwd = vim.fn.getcwd()
+  for _, filename in ipairs(filenames) do
+    if vim.loop.fs_stat(cwd .. '/' .. filename) then
+      return true
+    end
+  end
+  return false
+end
+
+-- ESLint Fix on Save: Conditional Setup
 local eslint_group = vim.api.nvim_create_augroup('ESLintFixOnSave', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = eslint_group,
-  pattern = '*.jsx,*.ts,*.tsx', -- Adjust patterns to match your project files
-  callback = function()
-    -- Run the :ESLintFixAll command
-    vim.cmd 'EslintFixAll'
-  end,
-})
+if files_exists_in_dir { '.eslintrc', '.eslintrc.json' } then
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    group = eslint_group,
+    pattern = '*.jsx,*.ts,*.tsx', -- Adjust patterns to match your project files
+    callback = function()
+      vim.cmd 'EslintFixAll'
+    end,
+  })
+end
+
+-- Biome Format and Lint on Save: Conditional Setup
+local biome_group = vim.api.nvim_create_augroup('BiomeFixOnSave', { clear = true })
+if files_exists_in_dir { 'biome.json' } then
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    group = biome_group,
+    pattern = '*.tsx,*.ts,*.jsx', -- Adjust patterns to match your project files
+    callback = function()
+      vim.fn.system 'biome lint --write --unsafe'
+      vim.fn.system 'biome format --write --unsafe'
+    end,
+  })
+end
 
 -- avoid the automatic insert mode when a file is opened with telescope
 -- https://github.com/nvim-telescope/telescope.nvim/issues/2027#issuecomment-1561836585

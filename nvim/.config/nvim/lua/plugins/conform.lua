@@ -5,17 +5,17 @@ return {
     require('conform').setup {
       formatters_by_ft = {
         lua = { 'stylua' },
-        svelte = { { 'prettierd', 'prettier' } },
-        javascript = { { 'prettierd', 'prettier' } },
-        typescript = { { 'prettierd', 'prettier' } },
-        javascriptreact = { { 'prettierd', 'prettier' } },
-        typescriptreact = { { 'prettierd', 'prettier' } },
-        json = { { 'prettierd', 'prettier' } },
-        graphql = { { 'prettierd', 'prettier' } },
+        svelte = { 'prettierd' },
+        javascript = { 'prettierd' },
+        typescript = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
+        json = { 'prettierd' },
+        graphql = { 'prettierd' },
         java = { 'google-java-format' },
         kotlin = { 'ktlint' },
         ruby = { 'standardrb' },
-        markdown = { { 'prettierd', 'prettier' } },
+        markdown = { 'prettierd' },
         erb = { 'htmlbeautifier' },
         html = { 'htmlbeautifier' },
         bash = { 'beautysh' },
@@ -23,10 +23,10 @@ return {
         rust = { 'rustfmt' },
         yaml = { 'yamlfix' },
         toml = { 'taplo' },
-        css = { { 'prettierd', 'prettier' } },
-        scss = { { 'prettierd', 'prettier' } },
+        css = { 'prettierd' },
+        scss = { 'prettierd' },
       },
-          format_on_save = function(bufnr)
+      format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.

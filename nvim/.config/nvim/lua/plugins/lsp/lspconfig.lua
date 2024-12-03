@@ -71,11 +71,20 @@ return {
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
     local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
     for type, icon in pairs(signs) do
       local hl = 'DiagnosticSign' .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+    end
+
+    local function file_exists_in_dir(filenames)
+      local cwd = vim.fn.getcwd()
+      for _, filename in ipairs(filenames) do
+        if vim.loop.fs_stat(cwd .. '/' .. filename) ~= nil then
+          return true
+        end
+      end
+      return false
     end
 
     mason_lspconfig.setup_handlers {
@@ -85,48 +94,30 @@ return {
           capabilities = capabilities,
         }
       end,
-      ['graphql'] = function()
-        -- configure graphql language server
-        lspconfig['graphql'].setup {
-          capabilities = capabilities,
-          filetypes = { 'graphql', 'gql', 'typescriptreact', 'javascriptreact' },
-        }
-      end,
-      ['emmet_ls'] = function()
-        -- configure emmet language server
-        lspconfig['emmet_ls'].setup {
-          capabilities = capabilities,
-          filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
-        }
-      end,
       ['eslint'] = function()
-        lspconfig['eslint'].setup {
-          capabilities = capabilities,
-          settings = {
-            autoFixOnSave = true,
-          },
-        }
-      end,
-
-      ['volar'] = function()
-        lspconfig['volar'].setup {
-          capabilities = capabilities,
-          init_options = {
-            vue = {
-              hybridMode = false,
+        if file_exists_in_dir { '.eslintrc.json' } then
+          lspconfig['eslint'].setup {
+            capabilities = capabilities,
+            settings = {
+              autoFixOnSave = true,
             },
-          },
-          filetypes = { 'vue' },
-        }
+          }
+        end
       end,
-
+      ['biome'] = function()
+        if file_exists_in_dir { 'biome.json' } then
+          lspconfig['biome'].setup {
+            cmd = { 'biome', 'lsp-proxy' },
+            capabilities = capabilities,
+            filetypes = { 'typescriptreact', 'javascriptreact' },
+          }
+        end
+      end,
       ['lua_ls'] = function()
-        -- configure lua server (with special settings)
         lspconfig['lua_ls'].setup {
           capabilities = capabilities,
           settings = {
             Lua = {
-              -- make the language server recognize "vim" global
               diagnostics = {
                 globals = { 'vim' },
                 disabled = { 'missing-fields' },

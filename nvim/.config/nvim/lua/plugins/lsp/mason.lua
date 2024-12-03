@@ -37,7 +37,7 @@ return {
         'emmet_ls',
         'prismals',
         'eslint',
-        -- 'golangci_lint_ls',
+        'biome',
       },
     }
 
