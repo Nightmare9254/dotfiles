@@ -25,6 +25,15 @@ return {
     vim.keymap.set('n', '<leader>4', function()
       harpoon:list():select(4)
     end)
+    vim.keymap.set('n', '<leader>5', function()
+      harpoon:list():select(5)
+    end)
+    vim.keymap.set('n', '<leader>6', function()
+      harpoon:list():select(6)
+    end)
+    vim.keymap.set('n', '<leader>7', function()
+      harpoon:list():select(7)
+    end)
 
     -- Toggle previous & next buffers stored within Harpoon list
     vim.keymap.set('n', '<C-S-P>', function()
@@ -62,6 +71,12 @@ return {
             map('i', '<C-d>', function()
               local state = require 'telescope.actions.state'
               local selected_entry = state.get_selected_entry()
+
+              if not selected_entry then
+                vim.notify('No item selected', vim.log.levels.WARN)
+                return
+              end
+
               local current_picker = state.get_current_picker(prompt_bufnr)
 
               table.remove(harpoon_files.items, selected_entry.index)
