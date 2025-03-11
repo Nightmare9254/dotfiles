@@ -39,13 +39,13 @@ return {
         'eslint',
         'biome',
       },
+      automatic_installation = {},
     }
 
     mason_tool_installer.setup {
       ensure_installed = {
         'prettierd', -- prettier formatter
         'stylua', -- lua formatter
-        'eslint_d',
       },
     }
   end,

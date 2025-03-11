@@ -95,7 +95,7 @@ return {
         }
       end,
       ['eslint'] = function()
-        if file_exists_in_dir { '.eslintrc.json' } then
+        if file_exists_in_dir { '.eslintrc.json', '.eslintrc' } then
           lspconfig['eslint'].setup {
             capabilities = capabilities,
             settings = {
