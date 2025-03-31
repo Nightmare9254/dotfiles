@@ -41,15 +41,20 @@ M.format_file = function(bufnr)
   local formatter = M.biome_or_prettier(bufnr)
 
   if formatter[1] == 'biome' then
-    -- Run Biome
     local result = vim.fn.system('biome check --write ' .. vim.fn.shellescape(file))
     if vim.v.shell_error == 0 then
       vim.cmd 'edit!'
     else
       vim.api.nvim_err_writeln('Biome error: ' .. result)
     end
+  elseif formatter[1] == 'prettier' then
+    local result = vim.fn.system('prettier --write ' .. vim.fn.shellescape(file))
+    if vim.v.shell_error == 0 then
+      vim.cmd 'edit!'
+    else
+      vim.api.nvim_err_writeln('Prettier error: ' .. result)
+    end
   end
-  -- Add Prettier logic here if needed
 end
 
 M.filetypes_with_dynamic_formatter = {

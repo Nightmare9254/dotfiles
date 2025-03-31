@@ -6,7 +6,7 @@ return {
   config = function()
     require('conform').setup {
       -- formatters_by_ft = {
-      --   lua = { 'stylua' },
+      lua = { 'stylua' },
       --   svelte = { 'prettierd' },
       --   ['javascript'] = { 'biome-check' },
       --   ['typescript'] = { 'biome-check' },
@@ -47,9 +47,10 @@ return {
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-
         local formatter = format_utils.biome_or_prettier(bufnr)
         if formatter[1] == 'biome' then
+          return { timeout_ms = 500, lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype], async = false }
+        elseif formatter[1] == 'prettier' then
           return { timeout_ms = 500, lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype], async = false }
         end
         return nil
