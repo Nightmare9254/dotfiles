@@ -1,0 +1,37 @@
+@import "~/.config/rofi/config.rasi"  
+
+window {
+  width: inherit;
+  height: inherit;
+}
+
+mainbox {
+  children:
+    [ "inputbar", "listview"];
+}
+
+entry {
+  expand: true;
+  placeholder: " ⬇️  Select Which Rofi Theme wanted to apply";
+}
+
+listview {
+  columns: 2;
+  lines: 7;
+  fixed-height: false;
+  margin: 10px;
+  scrollbar: true;
+  spacing: 6px;
+  cycle: true;
+}
+
+element-icon {
+  size: 0%;
+}
+
+element-text {
+  horizontal-align: 0.0;
+  vertical-align: 0.5;
+  margin: 0px;
+  padding: 0px;
+}

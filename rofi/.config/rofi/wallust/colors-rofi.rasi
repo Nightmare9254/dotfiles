@@ -1,0 +1,52 @@
+* {
+  active-background:       #cba6f7;  /* mauve */
+  active-foreground:       #1e1e2e;  /* base */
+
+  normal-background:       #1e1e2e;  /* base */
+  normal-foreground:       #cdd6f4;  /* text */
+
+  urgent-background:       #f38ba8;  /* red */
+  urgent-foreground:       #1e1e2e;  /* base */
+
+  alternate-active-background: #eba0ac;  /* maroon */
+  alternate-active-foreground: #1e1e2e;
+
+  alternate-normal-background: #1e1e2e;  /* base */
+  alternate-normal-foreground: #cdd6f4;  /* text */
+
+  alternate-urgent-background: #f38ba8;  /* red */
+  alternate-urgent-foreground: #1e1e2e;
+
+  selected-active-background: #f38ba8;  /* red */
+  selected-active-foreground: #1e1e2e;
+
+  selected-normal-background: #cba6f7;  /* mauve */
+  selected-normal-foreground: #1e1e2e;
+
+  selected-urgent-background: #f2cdcd;  /* flamingo */
+  selected-urgent-foreground: #1e1e2e;
+
+  background-color: #1e1e2e;  /* base */
+  background: rgba(30, 30, 46, 0.7); /* base w/ transparency */
+  foreground: #cdd6f4;  /* text */
+  border-color: #cba6f7;  /* mauve */
+
+  color0:  #11111b;  /* crust */
+  color1:  #181825;  /* mantle */
+  color2:  #1e1e2e;  /* base */
+  color3:  #313244;  /* surface0 */
+  color4:  #45475a;  /* surface1 */
+  color5:  #585b70;  /* surface2 */
+  color6:  #6c7086;  /* overlay0 */
+  color7:  #7f849c;  /* overlay1 */
+  color8:  #9399b2;  /* overlay2 */
+  color9:  #a6adc8;  /* subtext0 */
+  color10: #bac2de;  /* subtext1 */
+  color11: #cdd6f4;  /* text */
+  color12: #b4befe;  /* lavender */
+  color13: #f5c2e7;  /* pink */
+  color14: #a6e3a1;  /* green */
+  color15: #f9e2af;  /* yellow */
+}
+
+

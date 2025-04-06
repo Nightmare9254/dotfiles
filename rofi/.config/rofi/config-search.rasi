@@ -1,0 +1,18 @@
+window {
+	width: 40%;
+	//orientation: horizontal;
+	height: inherit;
+	y-offset: 10px;
+	location: north;
+	children: [ "entry", "message" ];
+	border: 2px;
+	border-color: white/25%;
+}
+
+entry {
+	expand: true;
+	placeholder: "🔎 Web";
+	horizontal-align: 0.5;
+	padding: 25px;
+	border-radius: inherit;
+}

@@ -1,0 +1,18 @@
+@import "~/.config/rofi/config.rasi" 
+
+mainbox {
+  children: [ "entry", "message" ];
+  height: inherit;
+}
+
+window {
+  width: 30%;
+  height: inherit;
+}
+
+entry {
+  expand: true;
+  placeholder: " 🧮 Calculate";
+}
+
+listview {enable: false;}

@@ -1,0 +1,4 @@
+@import "~/.config/rofi/shared-fonts.rasi"
+
+@theme "~/.config/rofi/themes/main_theme.rasi"
+
