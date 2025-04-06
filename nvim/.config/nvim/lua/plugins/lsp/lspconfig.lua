@@ -4,17 +4,17 @@ return {
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
     { 'antosha417/nvim-lsp-file-operations', config = true },
-    { 'folke/neodev.nvim', opts = {} },
+    { 'folke/neodev.nvim',                   opts = {} },
   },
   config = function()
-    -- import lspconfig plugin
     local lspconfig = require 'lspconfig'
 
-    -- import mason_lspconfig plugin
     local mason_lspconfig = require 'mason-lspconfig'
 
-    -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
+
+    local util = require "lspconfig/util"
+
 
     local keymap = vim.keymap -- for conciseness
 
@@ -104,6 +104,61 @@ return {
           }
         end
       end,
+      ['gopls'] = function()
+        lspconfig['gopls'].setup {
+          capabilities = capabilities,
+          cmd = { "gopls" },
+          filletypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+          root_dir = util.root_pattern("go.work", 'go.mod', '.git'),
+          settings = {
+            gopls = {
+              gofumpt = true,
+              codelenses = {
+                gc_details = false,
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              analyses = {
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
+              },
+              usePlaceholders = true,
+              completeUnimported = true,
+              staticcheck = true,
+              directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+              semanticTokens = true
+            }
+
+          }
+        }
+      end,
+      ['prettierd'] = function()
+        if file_exists_in_dir { '.prettierrc' } then
+          lspconfig['prettierd'].setup {
+            capabilities = capabilities,
+            settings = {
+              autoFixOnSave = true,
+            },
+          }
+        end
+      end,
+
       ['biome'] = function()
         if file_exists_in_dir { 'biome.json' } then
           lspconfig['biome'].setup {

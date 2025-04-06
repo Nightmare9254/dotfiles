@@ -45,6 +45,10 @@ return {
         'vimdoc',
         'c',
       },
+      sync_install = false,
+      modules = {},
+      auto_install = true,
+      ignore_install = {},
       incremental_selection = {
         enable = true,
         keymaps = {

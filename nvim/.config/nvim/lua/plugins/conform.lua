@@ -7,6 +7,7 @@ return {
     require('conform').setup {
       -- formatters_by_ft = {
       lua = { 'stylua' },
+      go = { { "gofmt", "goimports", 'goimports_reviser' } },
       --   svelte = { 'prettierd' },
       --   ['javascript'] = { 'biome-check' },
       --   ['typescript'] = { 'biome-check' },
@@ -30,6 +31,7 @@ return {
       -- },
       formatters_by_ft = (function()
         local result = {}
+        print "test"
         for _, ft in ipairs(format_utils.filetypes_with_dynamic_formatter) do
           result[ft] = format_utils.biome_or_prettier
         end
@@ -37,28 +39,21 @@ return {
       end)(),
 
       format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = {
           c = true,
           cpp = true,
         }
+
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        local formatter = format_utils.biome_or_prettier(bufnr)
-        if formatter[1] == 'biome' then
-          return { timeout_ms = 500, lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype], async = false }
-        elseif formatter[1] == 'prettier' then
-          return { timeout_ms = 500, lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype], async = false }
-        end
-        return nil
+
+        return { timeout_ms = 500, lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype], async = false }
       end,
       formatters = {
         biome = {
           command = 'biome',
-          args = { 'check', '--write', '$FILENAME' }, --  ← this was the magic that fixed organizing imports
+          args = { 'check', '--write', '$FILENAME' },
           stdin = false,
         },
       },

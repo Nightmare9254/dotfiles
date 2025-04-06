@@ -30,22 +30,25 @@ return {
         'ts_ls',
         'html',
         'cssls',
-        'volar',
         'tailwindcss',
         'lua_ls',
-        'graphql',
         'emmet_ls',
         'prismals',
         'eslint',
         'biome',
+        "gopls"
       },
       automatic_installation = {},
     }
 
     mason_tool_installer.setup {
       ensure_installed = {
-        'prettierd', -- prettier formatter
-        'stylua', -- lua formatter
+        'prettierd',
+        'stylua',
+        "gofumpt",
+        "shellcheck",
+        "goimports-reviser",
+        "golines"
       },
     }
   end,
