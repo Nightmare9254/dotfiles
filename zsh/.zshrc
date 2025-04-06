@@ -59,3 +59,11 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 export PATH=$PATH:/home/nightmare/.spicetify
+
+# pnpm
+export PNPM_HOME="/home/nightmare/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
