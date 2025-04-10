@@ -1,7 +1,3 @@
-#!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ 
-# This script for selecting wallpapers (SUPER W)
-
 # WALLPAPERS PATH
 wallDIR="$HOME/Pictures/wallpapers"
 SCRIPTSDIR="$HOME/.config/hypr/scripts"

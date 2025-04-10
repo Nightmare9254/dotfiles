@@ -1,7 +1,3 @@
-#!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-# Playerctl
-
 music_icon="$HOME/.config/swaync/icons/music.png"
 
 # Play the next track

@@ -1,5 +1,3 @@
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-# Modified Script for Google Search
 # Original Submitted by https://github.com/LeventKaanOguz
 
 # Opens rofi in dmenu mod and waits for input. Then pushes the input to the query of the URL.

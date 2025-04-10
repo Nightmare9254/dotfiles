@@ -1,8 +1,3 @@
-#!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-
-# wlogout (Power, Screen Lock, Suspend, etc)
-
 # Set variables for parameters
 A_2160=450
 B_2160=450

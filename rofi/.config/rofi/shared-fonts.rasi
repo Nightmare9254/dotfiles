@@ -1,5 +1,5 @@
 configuration {
-  font: "Fira Code SemiBold 16";
+  font: "Fira Code SemiBold 18";
 }
 
 element-text {
