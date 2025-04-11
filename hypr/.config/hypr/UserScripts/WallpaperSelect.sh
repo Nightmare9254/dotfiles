@@ -122,7 +122,7 @@ set_sddm_wallpaper() {
       # Open terminal to enter password
       $terminal -e bash -c "echo 'Enter your password to set wallpaper as SDDM Background'; \
             sudo cp -r $wallpaper_current '$sddm_sequoia/backgrounds/default' && \
-            notify-send -i '$iDIR/ja.png' 'SDDM' 'Background SET'"
+            notify-send -i '$iDIR/HUH.png' 'SDDM' 'Background SET'"
     fi
   fi
 }

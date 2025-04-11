@@ -1,4 +1,4 @@
-notif="$HOME/.config/swaync/images/ja.png"
+notif="$HOME/.config/swaync/images/HUH.png"
 
 LAYOUT=$(hyprctl -j getoption general:layout | jq '.str' | sed 's/"//g')
 

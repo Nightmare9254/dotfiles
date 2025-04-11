@@ -1,7 +1,3 @@
-#!/bin/bash
-# 💫 https://github.com/JaKooLit 💫 #
-# ZSH and oh-my-zsh & Optional Pokemon Color Scrips #
-
 zsh=(
     eza
     fzf

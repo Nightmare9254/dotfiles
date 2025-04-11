@@ -61,7 +61,7 @@ main() {
         exit 0
     fi
     add_theme_to_config "$choice"
-    notify-send -i "$iDIR/ja.png" -u low 'Rofi Theme applied:' "$choice"
+    notify-send -i "$iDIR/HUH.png" -u low 'Rofi Theme applied:' "$choice"
 }
 
 if pgrep -x "rofi" >/dev/null; then

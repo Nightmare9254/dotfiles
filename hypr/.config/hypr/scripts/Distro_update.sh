@@ -12,23 +12,23 @@ if command -v paru &> /dev/null || command -v yay &> /dev/null; then
   # Arch-based
   if command -v paru &> /dev/null; then
     kitty -T update paru -Syu
-    notify-send -i "$iDIR/ja.png" -u low 'Arch-based system' 'has been updated.'
+    notify-send -i "$iDIR/HUH.png" -u low 'Arch-based system' 'has been updated.'
   else
     kitty -T update yay -Syu
-    notify-send -i "$iDIR/ja.png" -u low 'Arch-based system' 'has been updated.'
+    notify-send -i "$iDIR/HUH.png" -u low 'Arch-based system' 'has been updated.'
   fi
 elif command -v dnf &> /dev/null; then
   # Fedora-based
   kitty -T update sudo dnf update --refresh -y
-  notify-send -i "$iDIR/ja.png" -u low 'Fedora system' 'has been updated.'
+  notify-send -i "$iDIR/HUH.png" -u low 'Fedora system' 'has been updated.'
 elif command -v apt &> /dev/null; then
   # Debian-based (Debian, Ubuntu, etc.)
   kitty -T update sudo apt update && sudo apt upgrade -y
-  notify-send -i "$iDIR/ja.png" -u low 'Debian/Ubuntu system' 'has been updated.'
+  notify-send -i "$iDIR/HUH.png" -u low 'Debian/Ubuntu system' 'has been updated.'
 elif command -v zypper &> /dev/null; then
   # openSUSE-based
   kitty -T update sudo zypper dup -y
-  notify-send -i "$iDIR/ja.png" -u low 'openSUSE system' 'has been updated.'
+  notify-send -i "$iDIR/HUH.png" -u low 'openSUSE system' 'has been updated.'
 else
   # Unsupported distro
   notify-send -i "$iDIR/error.png" -u critical "Unsupported system" "This script does not support your distribution."

@@ -1,3 +1,4 @@
+/* Waybar Modules - Custom Modules */
 /* Basically created to reduce the lines in Waybar Modules bank */
 /* NOTE: This is only for Custom Modules */
 /* Custom Modules like weather browser, tty, file manager at the beginning */
@@ -60,6 +61,13 @@
 	"tooltip-format": "Left Click: Quick Tips\nRight Click: Keybinds",
 },
 
+"custom/dot_update": {
+	"format": " 󰁈 ",
+	"on-click": "$HOME/.config/hypr/scripts/KooLsDotsUpdate.sh",
+	"tooltip": true,
+	"tooltip-format": "Check KooL Dots update\nIf available",
+},
+
 // Hypridle inhibitor
 "custom/hypridle": {
 	"format": "󱫗 ",
@@ -77,6 +85,15 @@
 	"interval": 1,
 	"format": " {}",
 	"on-click": "$HOME/.config/hypr/scripts/SwitchKeyboardLayout.sh",
+},
+
+"custom/light_dark": {
+	"format": "󰔎 ",
+	"on-click": "$HOME/.config/hypr/scripts/DarkLight.sh",
+	"on-click-right": "$HOME/.config/hypr/scripts/WaybarStyles.sh",
+	"on-click-middle": "$HOME/.config/hypr/UserScripts/WallpaperSelect.sh",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Switch Dark-Light Themes\nMiddle Click: Wallpaper Menu\nRight Click: Waybar Styles Menu",
 },
 
 "custom/lock": {

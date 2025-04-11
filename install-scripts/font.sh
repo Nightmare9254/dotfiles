@@ -1,7 +1,4 @@
 #!/bin/bash
-# 💫 https://github.com/JaKooLit 💫 #
-# FONTS #
-
 fonts=(
 adobe-source-code-pro-fonts
 fira-code-fonts

@@ -1,4 +1,4 @@
-notif="$HOME/.config/swaync/images/ja.png"
+notif="$HOME/.config/swaync/images/HUH.png"
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
 
 

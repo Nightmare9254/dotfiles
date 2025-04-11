@@ -1,6 +1,4 @@
 #!/bin/bash
-# 💫 https://github.com/JaKooLit 💫 #
-# SDDM Log-in Manager #
 if [[ $USE_PRESET = [Yy] ]]; then
   source ./preset.sh
 fi

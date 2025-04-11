@@ -9,5 +9,5 @@ if [ "${STATE}" == "2" ]; then
 else
 	hyprctl keyword decoration:blur:size 5
 	hyprctl keyword decoration:blur:passes 2
-  	notify-send -e -u low -i "$notif/ja.png" " Normal Blur"
+  	notify-send -e -u low -i "$notif/HUH.png" " Normal Blur"
 fi

@@ -26,7 +26,7 @@ fi
 if grep -q '#include ./kitty-themes/' "$kitty_config"; then
 	sed -i "s|#include ./kitty-themes/|include ./kitty-themes/$theme.conf|g" "$kitty_config"
 	
-	notify-send -u low -i "$iDIR/ja.png" "$theme" "Kitty Theme Loaded"
+	notify-send -u low -i "$iDIR/HUH.png" "$theme" "Kitty Theme Loaded"
 	
 	for pid_kitty in $(pidof kitty); do
 	  kill -SIGUSR1 "$pid_kitty"
@@ -35,7 +35,7 @@ else
   # If the line is already uncommented, just add the chosen theme
 	sed -i "s|include ./kitty-themes/.*|include ./kitty-themes/$theme.conf|g" "$kitty_config"
 	
-	notify-send -u low -i "$iDIR/ja.png" "$theme" "Kitty Theme Loaded"
+	notify-send -u low -i "$iDIR/HUH.png" "$theme" "Kitty Theme Loaded"
 	
 	for pid_kitty in $(pidof kitty); do
       kill -SIGUSR1 "$pid_kitty"
