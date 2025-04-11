@@ -1,5 +1,3 @@
-# Scripts for refreshing ags waybar, rofi, swaync, wallust
-
 SCRIPTSDIR=$HOME/.config/hypr/scripts
 UserScripts=$HOME/.config/hypr/UserScripts
 
@@ -20,25 +18,25 @@ for _prs in "${_ps[@]}"; do
     fi
 done
 
-# quit ags
-ags -q
+# added since wallust sometimes not applying
+killall -SIGUSR2 waybar 
 
-sleep 0.3
+# quit ags & relaunch ags
+#ags -q && ags &
+
+# some process to kill
+for pid in $(pidof waybar rofi swaync ags swaybg); do
+    kill -SIGUSR1 "$pid"
+done
+
 #Restart waybar
+sleep 1
 waybar &
 
 # relaunch swaync
 sleep 0.5
 swaync > /dev/null 2>&1 &
-
-# relaunch ags
-ags &
-
-# Relaunching rainbow borders if the script exists
-sleep 1
-if file_exists "${UserScripts}/RainbowBorders.sh"; then
-    ${UserScripts}/RainbowBorders.sh &
-fi
-
+# reload swaync
+swaync-client --reload-config
 
 exit 0

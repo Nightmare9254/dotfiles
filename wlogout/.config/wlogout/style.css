@@ -26,16 +26,16 @@ button:focus {
 	outline-style: none;
 
 }
-
+/* 
 button:hover {
 	background-color: transparent;
 	color: @color13;
 	background-size: 50%;
-	margin: 30px;
+	margin: 0px;
 	border-radius: 80px;
 	outline-style: none;
 
-}
+} */
 
 /* Adjust the size of the icon or content inside the button */
 button span {

@@ -1,5 +1,4 @@
-# Not my own work. This was added through Github PR. Credit to original author
-
+#!/bin/bash
 #----- Optimized bars animation without much CPU usage increase --------
 bar="▁▂▃▄▅▆▇█"
 dict="s/;//g"
@@ -16,6 +15,7 @@ done
 config_file="/tmp/bar_cava_config"
 cat >"$config_file" <<EOF
 [general]
+framerate = 60
 bars = 10
 
 [input]

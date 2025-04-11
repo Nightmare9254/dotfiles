@@ -1,7 +1,5 @@
-#!/bin/bash
-
 city=
-cachedir=~/.cache/rbn
+cachedir="~/.cache/rbn"
 cachefile=${0##*/}-$1
 
 if [ ! -d $cachedir ]; then
@@ -81,4 +79,4 @@ echo -e "{\"text\":\""$temperature $condition"\", \"alt\":\""${weather[0]}"\", \
 
 cached_weather=" $temperature  \n$condition ${weather[1]}"
 
-echo -e $cached_weather >  ~/.cache/.weather_cache
+echo -e $cached_weather >  "~/.cache/.weather_cache"
