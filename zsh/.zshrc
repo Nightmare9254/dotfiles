@@ -53,6 +53,7 @@ alias npi="npm install"
 alias nps="npm run start"
 alias npb="npm run build"
 alias npp="npm run prod"
+alias sd="sudo systemctl start docker"
 
 # --- Setup volta
 export VOLTA_HOME="$HOME/.volta"
@@ -60,6 +61,8 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 
 export PATH=$PATH:/home/nightmare/.spicetify
 
+export GOPATH=$HOME/go  
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 # pnpm
 export PNPM_HOME="/home/nightmare/.local/share/pnpm"
 case ":$PATH:" in

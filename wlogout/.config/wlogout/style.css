@@ -4,7 +4,6 @@
 window {
 	font-size: 24pt;
 	color: @foreground;
-	/* text */
 	background-color: rgba(30, 30, 46, 0.8);
 }
 
@@ -24,9 +23,9 @@ button:focus {
 	background-size: 50%;
 	border: 0px;
 	outline-style: none;
-
+	color: @color13;
 }
-/* 
+
 button:hover {
 	background-color: transparent;
 	color: @color13;
@@ -34,8 +33,7 @@ button:hover {
 	margin: 0px;
 	border-radius: 80px;
 	outline-style: none;
-
-} */
+}
 
 /* Adjust the size of the icon or content inside the button */
 button span {
