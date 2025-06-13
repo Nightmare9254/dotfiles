@@ -43,7 +43,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # ---- Load shh-agent for git authentications
-eval `keychain --agents ssh --eval ed_github ed_saint-gobain id_opnsense rsa_dhl rsa_ext-molndal rsa_ideo`
+eval `keychain --eval ed_github --eval ed_saint-gobain --eval id_opnsense --eval rsa_dhl --eval rsa_ext-molndal --eval rsa_ideo`
 
 alias pn="pnpm"
 alias pni="pnpm run install"
@@ -54,12 +54,17 @@ alias nps="npm run start"
 alias npb="npm run build"
 alias npp="npm run prod"
 alias sd="sudo systemctl start docker"
+alias jdu="just dev-up"
+alias jdl="just dev-logs"
+alias jdr="just dev-rebuild"
+alias code="codium"
 
 # --- Setup volta
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 export PATH=$PATH:/home/nightmare/.spicetify
+export PATH=$PATH:/home/nightmare/.tmux/plugins/tmuxifier/bin
 
 export GOPATH=$HOME/go  
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
@@ -70,3 +75,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+export PATH=$HOME/.local/bin:$PATH

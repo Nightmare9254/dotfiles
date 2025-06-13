@@ -5,6 +5,8 @@ return {
     config = function()
       local notify = require 'notify'
 
+
+
       local filtered_message = { 'No information available' }
 
       -- Override notify function to filter out messages
@@ -24,6 +26,11 @@ return {
         end
         return notify(message, level, merged_opts)
       end
+
+      notify.setup({
+        max_width = 500,
+        merge_duplicates = true,
+      })
 
       -- Update colors to use catpuccino colors
       vim.cmd [[

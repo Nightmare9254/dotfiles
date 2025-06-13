@@ -51,12 +51,13 @@ return {
     }
 
     -- set keymaps
-    local keymap = vim.keymap -- for conciseness
+    local keymap = vim
+    .keymap                                                                                                           -- for conciseness
 
-    keymap.set('n', '<leader>ee', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file [E]xplorer' }) -- toggle file explorer
+    keymap.set('n', '<leader>ee', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file [E]xplorer' })                     -- toggle file explorer
     keymap.set('n', '<leader>ef', '<cmd>NvimTreeFindFile<CR>', { desc = 'Toggle file [E]xplorer on current [F]ile' }) -- toggle file explorer on current file
-    keymap.set('n', '<leader>ec', '<cmd>NvimTreeCollapse<CR>', { desc = '[E]xplorer [C]ollapse' }) -- collapse file explorer
-    keymap.set('n', '\\', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer using [\\]' }) -- toggle file explorer
-    keymap.set('n', '<leader>er', '<cmd>NvimTreeRefresh<CR>', { desc = '[Explorer] [R]efresh' }) -- refresh file explorer
+    keymap.set('n', '<leader>ec', '<cmd>NvimTreeCollapse<CR>', { desc = '[E]xplorer [C]ollapse' })                    -- collapse file explorer
+    keymap.set('n', '\\', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer using [\\]' })                    -- toggle file explorer
+    keymap.set('n', '<leader>er', '<cmd>NvimTreeRefresh<CR>', { desc = '[Explorer] [R]efresh' })                      -- refresh file explorer
   end,
 }
