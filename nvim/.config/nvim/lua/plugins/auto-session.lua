@@ -6,7 +6,6 @@ return {
     auto_session.setup {
       auto_restore = false,
       suppress_dirs = { '~/', '~/Dev/', '~/Downloads', '~/Documents', '~/Desktop/' },
-      sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
     }
 
     local keymap = vim.keymap
