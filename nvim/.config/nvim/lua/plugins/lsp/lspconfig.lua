@@ -164,6 +164,9 @@ return {
           lspconfig['biome'].setup {
             cmd = { 'biome', 'lsp-proxy' },
             capabilities = capabilities,
+            on_init = function(client)
+              client.offset_encoding = 'utf-16'
+            end,
             filetypes = { 'typescriptreact', 'javascriptreact' },
           }
         end
