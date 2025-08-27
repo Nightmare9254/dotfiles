@@ -35,10 +35,10 @@ return {
         'emmet_ls',
         'prismals',
         'eslint',
-        'biome',
+        'biome@1.9.4',
         "gopls"
       },
-      automatic_installation = {},
+      automatic_installation = true,
     }
 
     mason_tool_installer.setup {

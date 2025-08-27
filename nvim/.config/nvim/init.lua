@@ -163,6 +163,8 @@ vim.g.loaded_netrwPlugin = 1
 -- Disable autosave swapfile
 vim.opt.swapfile = false
 
+vim.opt.laststatus = 3
+
 vim.opt.guicursor = {
   'n-v-c:block',                                  -- Normal, visual, command-line: block cursor
   'i-ci-ve:ver25',                                -- Insert, command-line insert, visual-exclude: vertical bar cursor with 25% width

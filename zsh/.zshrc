@@ -58,6 +58,8 @@ alias jdu="just dev-up"
 alias jdl="just dev-logs"
 alias jdr="just dev-rebuild"
 alias code="codium"
+alias bnc='brave --disable-web-security --user-data-dir=/tmp/brave-cors'
+
 
 # --- Setup volta
 export VOLTA_HOME="$HOME/.volta"
