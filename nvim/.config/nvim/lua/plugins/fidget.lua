@@ -3,6 +3,12 @@ return {
   event = { 'BufEnter' },
   config = function()
     -- Turn on LSP, formatting, and linting status and progress information
-    require('fidget').setup {}
+    require('fidget').setup {
+      notification = {
+        window = {
+          avoid = { 'NvimTree' },
+        },
+      },
+    }
   end,
 }

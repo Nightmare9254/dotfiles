@@ -7,8 +7,6 @@ return {
     { 'folke/neodev.nvim',                   opts = {} },
   },
   config = function()
-    local lspconfig = require 'lspconfig'
-
     local mason_lspconfig = require 'mason-lspconfig'
 
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
@@ -96,22 +94,24 @@ return {
     mason_lspconfig.setup_handlers {
       -- default handler for installed servers
       function(server_name)
-        lspconfig[server_name].setup {
+        vim.lsp.config(server_name, {
           capabilities = capabilities,
-        }
+        })
+        vim.lsp.enable(server_name)
       end,
       ['eslint'] = function()
         if file_exists_in_dir { '.eslintrc.json', '.eslintrc' } then
-          lspconfig['eslint'].setup {
+          vim.lsp.config('eslint', {
             capabilities = capabilities,
             settings = {
               autoFixOnSave = true,
             },
-          }
+          })
+          vim.lsp.enable('eslint')
         end
       end,
       ['gopls'] = function()
-        lspconfig['gopls'].setup {
+        vim.lsp.config('gopls', {
           capabilities = capabilities,
           cmd = { "gopls" },
           filletypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
@@ -152,7 +152,8 @@ return {
             }
 
           }
-        }
+        })
+        vim.lsp.enable('gopls')
       end,
       -- ['prettierd'] = function()
       --   if file_exists_in_dir { '.prettierrc' } then
@@ -167,18 +168,19 @@ return {
 
       ['biome'] = function()
         if file_exists_in_dir { 'biome.json' } then
-          lspconfig['biome'].setup {
+          vim.lsp.config('biome', {
             cmd = { 'biome', 'lsp-proxy' },
             capabilities = capabilities,
             on_init = function(client)
               client.offset_encoding = 'utf-16'
             end,
             filetypes = { 'typescriptreact', 'javascriptreact' },
-          }
+          })
+          vim.lsp.enable('biome')
         end
       end,
       ['lua_ls'] = function()
-        lspconfig['lua_ls'].setup {
+        vim.lsp.config('lua_ls', {
           capabilities = capabilities,
           settings = {
             Lua = {
@@ -191,7 +193,8 @@ return {
               },
             },
           },
-        }
+        })
+        vim.lsp.enable('lua_ls')
       end,
     }
   end,
