@@ -60,6 +60,11 @@ alias jdr="just dev-rebuild"
 alias code="codium"
 alias bnc='brave --disable-web-security --user-data-dir=/tmp/brave-cors'
 
+export API_FOLDER=/home/nightmare/projects/PGNiG/pgnig-ebok-api
+export PROJECT_PATH=/home/nightmare/projects/PGNiG/pgnig-ebok-web
+export API_FILE=/home/nightmare/projects/PGNiG/pgnig-ebok-web/src/services/API.js
+
+
 
 # --- Setup volta
 export VOLTA_HOME="$HOME/.volta"
@@ -78,3 +83,5 @@ case ":$PATH:" in
 esac
 # pnpm end
 export PATH=$HOME/.local/bin:$PATH
+
+eval "$(zoxide init zsh)"

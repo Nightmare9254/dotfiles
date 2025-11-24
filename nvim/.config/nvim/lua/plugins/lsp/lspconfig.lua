@@ -154,16 +154,16 @@ return {
           }
         }
       end,
-      ['prettierd'] = function()
-        if file_exists_in_dir { '.prettierrc' } then
-          lspconfig['prettierd'].setup {
-            capabilities = capabilities,
-            settings = {
-              autoFixOnSave = true,
-            },
-          }
-        end
-      end,
+      -- ['prettierd'] = function()
+      --   if file_exists_in_dir { '.prettierrc' } then
+      --     lspconfig['prettierd'].setup {
+      --       capabilities = capabilities,
+      --       settings = {
+      --         autoFixOnSave = true,
+      --       },
+      --     }
+      --   end
+      -- end,
 
       ['biome'] = function()
         if file_exists_in_dir { 'biome.json' } then
