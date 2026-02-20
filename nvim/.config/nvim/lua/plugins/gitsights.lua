@@ -27,13 +27,18 @@ return {
           text = '‾',
         },
         changedelete = {
-          text = '~',
+          text = '±',
         },
       },
       current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',
       current_line_blame = true,
       current_line_blame_opts = {
         delay = 300,
+      },
+      diff_opts = {
+        ignore_whitespace = true,
+        ignore_whitespace_change = true,
+        ignore_whitespace_change_at_eol = true,
       },
     }
 
