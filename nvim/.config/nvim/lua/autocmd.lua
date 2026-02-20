@@ -40,12 +40,27 @@ local function files_exists_in_dir(filenames)
   return false
 end
 
+local function has_eslint_config()
+  return files_exists_in_dir {
+    '.eslintrc',
+    '.eslintrc.json',
+    '.eslintrc.js',
+    '.eslintrc.cjs',
+    '.eslintrc.yaml',
+    '.eslintrc.yml',
+    '.eslintrc.json5',
+    'eslint.config.js',
+    'eslint.config.cjs',
+    'eslint.config.mjs',
+  }
+end
+
 -- ESLint Fix on Save: Conditional Setup
 local eslint_group = vim.api.nvim_create_augroup('ESLintFixOnSave', { clear = true })
-if files_exists_in_dir { '.eslintrc', '.eslintrc.json' } then
+if has_eslint_config() then
   vim.api.nvim_create_autocmd('BufWritePost', {
     group = eslint_group,
-    pattern = '*.jsx,*.ts,*.tsx', -- Adjust patterns to match your project files
+    pattern = '*.jsx,*.ts,*.tsx,*.vue', -- Adjust patterns to match your project files
     callback = function()
       vim.cmd 'EslintFixAll'
     end,
@@ -54,7 +69,8 @@ end
 
 -- Biome Format and Lint on Save: Conditional Setup
 local biome_group = vim.api.nvim_create_augroup('BiomeFixOnSave', { clear = true })
-if files_exists_in_dir { 'biome.json' } then
+-- Only use Biome auto-fix when there is a Biome config and no ESLint config.
+if files_exists_in_dir { 'biome.json', 'biome.jsonc' } and not has_eslint_config() then
   vim.api.nvim_create_autocmd('BufWritePost', {
     group = biome_group,
     pattern = '*.tsx,*.ts,*.jsx', -- Adjust patterns to match your project files

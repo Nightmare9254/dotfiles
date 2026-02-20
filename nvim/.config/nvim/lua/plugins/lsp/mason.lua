@@ -36,7 +36,8 @@ return {
         'prismals',
         'eslint',
         'biome@1.9.4',
-        "gopls"
+        "gopls",
+        'volar',
       },
       automatic_installation = true,
     }

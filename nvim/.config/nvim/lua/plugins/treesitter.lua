@@ -33,6 +33,7 @@ return {
         'markdown',
         'markdown_inline',
         'svelte',
+        'vue',
         'graphql',
         'bash',
         'lua',

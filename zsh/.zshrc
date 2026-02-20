@@ -59,6 +59,7 @@ alias jdl="just dev-logs"
 alias jdr="just dev-rebuild"
 alias code="codium"
 alias bnc='brave --disable-web-security --user-data-dir=/tmp/brave-cors'
+alias oc='opencode'
 
 export API_FOLDER=/home/nightmare/projects/PGNiG/pgnig-ebok-api
 export PROJECT_PATH=/home/nightmare/projects/PGNiG/pgnig-ebok-web
@@ -85,3 +86,6 @@ esac
 export PATH=$HOME/.local/bin:$PATH
 
 eval "$(zoxide init zsh)"
+
+# opencode
+export PATH=/home/nightmare/.opencode/bin:$PATH

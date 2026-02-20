@@ -117,6 +117,21 @@ return {
       return false
     end
 
+    local function has_eslint_config()
+      return file_exists_in_dir {
+        '.eslintrc',
+        '.eslintrc.json',
+        '.eslintrc.js',
+        '.eslintrc.cjs',
+        '.eslintrc.yaml',
+        '.eslintrc.yml',
+        '.eslintrc.json5',
+        'eslint.config.js',
+        'eslint.config.cjs',
+        'eslint.config.mjs',
+      }
+    end
+
     mason_lspconfig.setup_handlers {
       -- default handler for installed servers
       function(server_name)
@@ -126,7 +141,7 @@ return {
         vim.lsp.enable(server_name)
       end,
       ['eslint'] = function()
-        if file_exists_in_dir { '.eslintrc.json', '.eslintrc' } then
+        if has_eslint_config() then
           vim.lsp.config('eslint', {
             capabilities = capabilities,
             settings = {
@@ -193,7 +208,10 @@ return {
       -- end,
 
       ['biome'] = function()
-        if file_exists_in_dir { 'biome.json' } then
+        local has_biome = file_exists_in_dir { 'biome.json', 'biome.jsonc' }
+        local has_eslint = has_eslint_config()
+
+        if has_biome and not has_eslint then
           vim.lsp.config('biome', {
             cmd = { 'biome', 'lsp-proxy' },
             capabilities = capabilities,
@@ -221,6 +239,19 @@ return {
           },
         })
         vim.lsp.enable('lua_ls')
+      end,
+      ['volar'] = function()
+        vim.lsp.config('volar', {
+          capabilities = capabilities,
+          filetypes = { 'vue', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+          root_dir = util.root_pattern('package.json', 'nuxt.config.ts', 'nuxt.config.js', '.git'),
+          init_options = {
+            vue = {
+              hybridMode = false,
+            },
+          },
+        })
+        vim.lsp.enable('volar')
       end,
     }
   end,
