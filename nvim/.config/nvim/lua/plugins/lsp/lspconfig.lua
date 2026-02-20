@@ -8,11 +8,10 @@ return {
   },
   config = function()
     local mason_lspconfig = require 'mason-lspconfig'
-
+    local lspconfig = require 'lspconfig'
+    local lsp_configurations = require 'lspconfig.configs'
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-
     local util = require "lspconfig/util"
-
 
     local keymap = vim.keymap -- for conciseness
 
@@ -67,6 +66,33 @@ return {
 
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
+
+    -- cspell_lsp (custom server)
+    local cspell_cmd
+    if vim.fn.executable('cspell-lsp') == 1 then
+      cspell_cmd = { 'cspell-lsp', '--stdio' }
+    elseif vim.fn.executable('pnpm') == 1 then
+      cspell_cmd = { 'pnpm', 'exec', 'cspell-lsp', '--stdio' }
+    end
+
+    if cspell_cmd then
+      if not lsp_configurations.cspell_lsp then
+        lsp_configurations.cspell_lsp = {
+          default_config = {
+            cmd = cspell_cmd,
+            filetypes = {
+              'go', 'rust', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'vue',
+              'html', 'css', 'json', 'yaml', 'markdown', 'gitcommit',
+            },
+            root_dir = require('lspconfig.util').root_pattern('.git', 'cspell.json', '.cspell.json'),
+          },
+        }
+      end
+
+      lspconfig.cspell_lsp.setup { capabilities = capabilities }
+    else
+      vim.notify('cspell-lsp (or pnpm exec cspell-lsp) not found; cspell LSP disabled', vim.log.levels.WARN)
+    end
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }

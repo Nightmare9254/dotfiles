@@ -26,8 +26,11 @@ ssh-add ~/.ssh/id_ed25519
 
 - Install **keychain**
 - Inside .zshrc there should be _eval `keychain --agents ssh --eval id_ed25519`_, which starts and asks for passphrase for added ssh key
+
 #### Setup separate ssh for repos
+
 Inside `.ssh/config` add:
+
 ```bash
 Host azure-work
     HostName ssh.dev.azure.com
@@ -35,10 +38,12 @@ Host azure-work
     IdentityFile ~/.ssh/rsa_azure_work
     IdentitiesOnly yes
 ```
+
 and then inside repository set remote to: `git@azure-work:v3/work-repo`, also to change username and email use:
+
 ```bash
 git config user.name "Nightmare9254"
-git config user.email "your_email@example.com"  
+git config user.email "your_email@example.com"
 ```
 
 ### Spicetify
@@ -69,3 +74,10 @@ spicetify config inject_css 1 inject_theme_js 1 replace_colors 1 overwrite_asset
 spicetify apply
 ```
 
+### CSpell
+
+- install cspell-lsp
+
+```bash
+pnpm add -g cspell-lsp
+```
