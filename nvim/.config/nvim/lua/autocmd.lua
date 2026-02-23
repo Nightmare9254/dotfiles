@@ -61,8 +61,20 @@ if has_eslint_config() then
   vim.api.nvim_create_autocmd('BufWritePost', {
     group = eslint_group,
     pattern = '*.jsx,*.ts,*.tsx,*.vue', -- Adjust patterns to match your project files
-    callback = function()
-      vim.cmd 'EslintFixAll'
+    callback = function(args)
+      local bufnr = args.buf
+      local clients = vim.lsp.get_clients { bufnr = bufnr, name = 'eslint' }
+      if #clients == 0 then
+        return
+      end
+
+      vim.lsp.buf.code_action {
+        context = {
+          only = { 'source.fixAll.eslint' },
+          diagnostics = {},
+        },
+        apply = true,
+      }
     end,
   })
 end

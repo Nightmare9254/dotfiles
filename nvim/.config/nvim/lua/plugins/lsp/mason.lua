@@ -36,10 +36,10 @@ return {
         'prismals',
         'eslint',
         'biome@1.9.4',
-        "gopls",
+        'gopls',
         'volar',
       },
-      automatic_installation = true,
+      automatic_enable = false,
     }
 
     mason_tool_installer.setup {

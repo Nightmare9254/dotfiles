@@ -7,11 +7,10 @@ return {
     { 'folke/neodev.nvim',                   opts = {} },
   },
   config = function()
-    local mason_lspconfig = require 'mason-lspconfig'
     local lspconfig = require 'lspconfig'
     local lsp_configurations = require 'lspconfig.configs'
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
-    local util = require "lspconfig/util"
+    local util = require 'lspconfig/util'
 
     local keymap = vim.keymap -- for conciseness
 
@@ -67,6 +66,12 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
+    local lsp_opts = {
+      on_init = function(client)
+        client.offset_encoding = 'utf-16'
+      end,
+    }
+
     -- cspell_lsp (custom server)
     local cspell_cmd
     if vim.fn.executable('cspell-lsp') == 1 then
@@ -89,7 +94,10 @@ return {
         }
       end
 
-      lspconfig.cspell_lsp.setup { capabilities = capabilities }
+      lspconfig.cspell_lsp.setup { 
+        capabilities = capabilities,
+        on_init = lsp_opts.on_init,
+      }
     else
       vim.notify('cspell-lsp (or pnpm exec cspell-lsp) not found; cspell LSP disabled', vim.log.levels.WARN)
     end
@@ -132,127 +140,125 @@ return {
       }
     end
 
-    mason_lspconfig.setup_handlers {
-      -- default handler for installed servers
-      function(server_name)
-        vim.lsp.config(server_name, {
-          capabilities = capabilities,
-        })
-        vim.lsp.enable(server_name)
-      end,
-      ['eslint'] = function()
-        if has_eslint_config() then
-          vim.lsp.config('eslint', {
-            capabilities = capabilities,
-            settings = {
-              autoFixOnSave = true,
-            },
-          })
-          vim.lsp.enable('eslint')
-        end
-      end,
-      ['gopls'] = function()
-        vim.lsp.config('gopls', {
-          capabilities = capabilities,
-          cmd = { "gopls" },
-          filletypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-          root_dir = util.root_pattern("go.work", 'go.mod', '.git'),
-          settings = {
-            gopls = {
-              gofumpt = true,
-              codelenses = {
-                gc_details = false,
-                generate = true,
-                regenerate_cgo = true,
-                run_govulncheck = true,
-                test = true,
-                tidy = true,
-                upgrade_dependency = true,
-                vendor = true,
-              },
-              hints = {
-                assignVariableTypes = true,
-                compositeLiteralFields = true,
-                compositeLiteralTypes = true,
-                constantValues = true,
-                functionTypeParameters = true,
-                parameterNames = true,
-                rangeVariableTypes = true,
-              },
-              analyses = {
-                nilness = true,
-                unusedparams = true,
-                unusedwrite = true,
-                useany = true,
-              },
-              usePlaceholders = true,
-              completeUnimported = true,
-              staticcheck = true,
-              directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-              semanticTokens = true
-            }
-
-          }
-        })
-        vim.lsp.enable('gopls')
-      end,
-      -- ['prettierd'] = function()
-      --   if file_exists_in_dir { '.prettierrc' } then
-      --     lspconfig['prettierd'].setup {
-      --       capabilities = capabilities,
-      --       settings = {
-      --         autoFixOnSave = true,
-      --       },
-      --     }
-      --   end
-      -- end,
-
-      ['biome'] = function()
-        local has_biome = file_exists_in_dir { 'biome.json', 'biome.jsonc' }
-        local has_eslint = has_eslint_config()
-
-        if has_biome and not has_eslint then
-          vim.lsp.config('biome', {
-            cmd = { 'biome', 'lsp-proxy' },
-            capabilities = capabilities,
-            on_init = function(client)
-              client.offset_encoding = 'utf-16'
-            end,
-            filetypes = { 'typescriptreact', 'javascriptreact' },
-          })
-          vim.lsp.enable('biome')
-        end
-      end,
-      ['lua_ls'] = function()
-        vim.lsp.config('lua_ls', {
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { 'vim' },
-                disabled = { 'missing-fields' },
-              },
-              completion = {
-                callSnippet = 'Replace',
-              },
-            },
-          },
-        })
-        vim.lsp.enable('lua_ls')
-      end,
-      ['volar'] = function()
-        vim.lsp.config('volar', {
-          capabilities = capabilities,
-          filetypes = { 'vue', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
-          root_dir = util.root_pattern('package.json', 'nuxt.config.ts', 'nuxt.config.js', '.git'),
-          init_options = {
-            vue = {
-              hybridMode = false,
-            },
-          },
-        })
-        vim.lsp.enable('volar')
-      end,
+    -- Default LSP servers with basic capabilities
+    local default_servers = {
+      'ts_ls',
+      'html',
+      'cssls',
+      'tailwindcss',
+      'emmet_ls',
+      'prismals',
     }
+
+    for _, server_name in ipairs(default_servers) do
+      vim.lsp.config(server_name, {
+        capabilities = capabilities,
+        on_init = lsp_opts.on_init,
+      })
+      vim.lsp.enable(server_name)
+    end
+
+    -- eslint (only if project has eslint config)
+    if has_eslint_config() then
+      vim.lsp.config('eslint', {
+        capabilities = capabilities,
+        on_init = lsp_opts.on_init,
+        settings = {
+          autoFixOnSave = true,
+        },
+      })
+      vim.lsp.enable('eslint')
+    end
+
+    -- gopls
+    vim.lsp.config('gopls', {
+      capabilities = capabilities,
+      on_init = lsp_opts.on_init,
+      cmd = { 'gopls' },
+      filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+      root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
+      settings = {
+        gopls = {
+          gofumpt = true,
+          codelenses = {
+            gc_details = false,
+            generate = true,
+            regenerate_cgo = true,
+            run_govulncheck = true,
+            test = true,
+            tidy = true,
+            upgrade_dependency = true,
+            vendor = true,
+          },
+          hints = {
+            assignVariableTypes = true,
+            compositeLiteralFields = true,
+            compositeLiteralTypes = true,
+            constantValues = true,
+            functionTypeParameters = true,
+            parameterNames = true,
+            rangeVariableTypes = true,
+          },
+          analyses = {
+            nilness = true,
+            unusedparams = true,
+            unusedwrite = true,
+            useany = true,
+          },
+          usePlaceholders = true,
+          completeUnimported = true,
+          staticcheck = true,
+          directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
+          semanticTokens = true,
+        },
+      },
+    })
+    vim.lsp.enable('gopls')
+
+    -- biome (if biome config exists and eslint is not configured)
+    local has_biome = file_exists_in_dir { 'biome.json', 'biome.jsonc' }
+    local has_eslint = has_eslint_config()
+
+    if has_biome and not has_eslint then
+      vim.lsp.config('biome', {
+        cmd = { 'biome', 'lsp-proxy' },
+        capabilities = capabilities,
+        on_init = lsp_opts.on_init,
+        filetypes = { 'typescriptreact', 'javascriptreact' },
+      })
+      vim.lsp.enable('biome')
+    end
+
+    -- lua_ls
+    vim.lsp.config('lua_ls', {
+      capabilities = capabilities,
+      on_init = lsp_opts.on_init,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { 'vim' },
+            disabled = { 'missing-fields' },
+          },
+          completion = {
+            callSnippet = 'Replace',
+          },
+        },
+      },
+    })
+    vim.lsp.enable('lua_ls')
+
+    -- volar
+    vim.lsp.config('volar', {
+      capabilities = capabilities,
+      on_init = lsp_opts.on_init,
+      filetypes = { 'vue', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+      root_dir = util.root_pattern('package.json', 'nuxt.config.ts', 'nuxt.config.js', '.git'),
+      init_options = {
+        vue = {
+          hybridMode = false,
+        },
+      },
+    })
+    vim.lsp.enable('volar')
   end,
 }
