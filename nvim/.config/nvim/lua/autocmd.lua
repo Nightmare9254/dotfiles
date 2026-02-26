@@ -29,35 +29,11 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- Create the autocommand for saving the current buffer
--- Utility function to check if any file in a list exists in the current working directory
-local function files_exists_in_dir(filenames)
-  local cwd = vim.fn.getcwd()
-  for _, filename in ipairs(filenames) do
-    if vim.loop.fs_stat(cwd .. '/' .. filename) then
-      return true
-    end
-  end
-  return false
-end
-
-local function has_eslint_config()
-  return files_exists_in_dir {
-    '.eslintrc',
-    '.eslintrc.json',
-    '.eslintrc.js',
-    '.eslintrc.cjs',
-    '.eslintrc.yaml',
-    '.eslintrc.yml',
-    '.eslintrc.json5',
-    'eslint.config.js',
-    'eslint.config.cjs',
-    'eslint.config.mjs',
-  }
-end
+local format_utils = require 'format'
 
 -- ESLint Fix on Save: Conditional Setup
 local eslint_group = vim.api.nvim_create_augroup('ESLintFixOnSave', { clear = true })
-if has_eslint_config() then
+if format_utils.has_eslint_config() then
   vim.api.nvim_create_autocmd('BufWritePost', {
     group = eslint_group,
     pattern = '*.jsx,*.ts,*.tsx,*.vue', -- Adjust patterns to match your project files
@@ -82,13 +58,14 @@ end
 -- Biome Format and Lint on Save: Conditional Setup
 local biome_group = vim.api.nvim_create_augroup('BiomeFixOnSave', { clear = true })
 -- Only use Biome auto-fix when there is a Biome config and no ESLint config.
-if files_exists_in_dir { 'biome.json', 'biome.jsonc' } and not has_eslint_config() then
+if format_utils.has_biome_config() and not format_utils.has_eslint_config() then
   vim.api.nvim_create_autocmd('BufWritePost', {
     group = biome_group,
     pattern = '*.tsx,*.ts,*.jsx', -- Adjust patterns to match your project files
     callback = function()
-      vim.fn.system 'biome lint --write --unsafe'
-      vim.fn.system 'biome format --write --unsafe'
+      local biome_cmd = format_utils.find_biome_cmd()
+      vim.fn.system(biome_cmd .. ' lint --write --unsafe')
+      vim.fn.system(biome_cmd .. ' format --write --unsafe')
     end,
   })
 end

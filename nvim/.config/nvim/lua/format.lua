@@ -1,11 +1,57 @@
 local M = {}
 
+-- Utility function to check if files exist in the current working directory
+M.files_exist_in_dir = function(filenames)
+  local cwd = vim.fn.getcwd()
+  for _, filename in ipairs(filenames) do
+    if vim.loop.fs_stat(cwd .. '/' .. filename) then
+      return true
+    end
+  end
+  return false
+end
+
 M.find_config = function(bufnr, config_files)
   return vim.fs.find(config_files, {
     upward = true,
     stop = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
     path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
   })[1]
+end
+
+-- Find biome executable, preferring project-local installation
+M.find_biome_cmd = function()
+  local cwd = vim.fn.getcwd()
+  local local_biome = cwd .. '/node_modules/.bin/biome'
+  
+  -- Check if local biome exists and is executable
+  if vim.fn.executable(local_biome) == 1 then
+    return local_biome
+  end
+  
+  -- Fall back to global biome
+  return 'biome'
+end
+
+-- Check if biome config exists
+M.has_biome_config = function()
+  return M.files_exist_in_dir { 'biome.json', 'biome.jsonc' }
+end
+
+-- Check if eslint config exists
+M.has_eslint_config = function()
+  return M.files_exist_in_dir {
+    '.eslintrc',
+    '.eslintrc.json',
+    '.eslintrc.js',
+    '.eslintrc.cjs',
+    '.eslintrc.yaml',
+    '.eslintrc.yml',
+    '.eslintrc.json5',
+    'eslint.config.js',
+    'eslint.config.cjs',
+    'eslint.config.mjs',
+  }
 end
 
 M.biome_or_prettier = function(bufnr)
@@ -41,7 +87,8 @@ M.format_file = function(bufnr)
   local formatter = M.biome_or_prettier(bufnr)
 
   if formatter[1] == 'biome' then
-    local result = vim.fn.system('biome check --write ' .. vim.fn.shellescape(file))
+    local biome_cmd = M.find_biome_cmd()
+    local result = vim.fn.system(biome_cmd .. ' check --write ' .. vim.fn.shellescape(file))
     if vim.v.shell_error == 0 then
       vim.cmd 'edit!'
     else

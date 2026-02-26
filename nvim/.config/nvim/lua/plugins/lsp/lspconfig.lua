@@ -11,6 +11,7 @@ return {
     local lsp_configurations = require 'lspconfig.configs'
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
     local util = require 'lspconfig/util'
+    local format_utils = require 'format'
 
     local keymap = vim.keymap -- for conciseness
 
@@ -115,30 +116,7 @@ return {
       },
     }
 
-    local function file_exists_in_dir(filenames)
-      local cwd = vim.fn.getcwd()
-      for _, filename in ipairs(filenames) do
-        if vim.loop.fs_stat(cwd .. '/' .. filename) ~= nil then
-          return true
-        end
-      end
-      return false
-    end
 
-    local function has_eslint_config()
-      return file_exists_in_dir {
-        '.eslintrc',
-        '.eslintrc.json',
-        '.eslintrc.js',
-        '.eslintrc.cjs',
-        '.eslintrc.yaml',
-        '.eslintrc.yml',
-        '.eslintrc.json5',
-        'eslint.config.js',
-        'eslint.config.cjs',
-        'eslint.config.mjs',
-      }
-    end
 
     -- Default LSP servers with basic capabilities
     local default_servers = {
@@ -159,7 +137,7 @@ return {
     end
 
     -- eslint (only if project has eslint config)
-    if has_eslint_config() then
+    if format_utils.has_eslint_config() then
       vim.lsp.config('eslint', {
         capabilities = capabilities,
         on_init = lsp_opts.on_init,
@@ -216,12 +194,9 @@ return {
     vim.lsp.enable('gopls')
 
     -- biome (if biome config exists and eslint is not configured)
-    local has_biome = file_exists_in_dir { 'biome.json', 'biome.jsonc' }
-    local has_eslint = has_eslint_config()
-
-    if has_biome and not has_eslint then
+    if format_utils.has_biome_config() and not format_utils.has_eslint_config() then
       vim.lsp.config('biome', {
-        cmd = { 'biome', 'lsp-proxy' },
+        cmd = { format_utils.find_biome_cmd(), 'lsp-proxy' },
         capabilities = capabilities,
         on_init = lsp_opts.on_init,
         filetypes = { 'typescriptreact', 'javascriptreact' },

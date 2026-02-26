@@ -52,7 +52,9 @@ return {
       end,
       formatters = {
         biome = {
-          command = 'biome',
+          command = function()
+            return format_utils.find_biome_cmd()
+          end,
           args = { 'check', '--write', '$FILENAME' },
           stdin = false,
         },
