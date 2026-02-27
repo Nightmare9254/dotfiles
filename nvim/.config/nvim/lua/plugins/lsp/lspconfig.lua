@@ -95,7 +95,7 @@ return {
         }
       end
 
-      lspconfig.cspell_lsp.setup { 
+      lspconfig.cspell_lsp.setup {
         capabilities = capabilities,
         on_init = lsp_opts.on_init,
       }
@@ -199,7 +199,7 @@ return {
         cmd = { format_utils.find_biome_cmd(), 'lsp-proxy' },
         capabilities = capabilities,
         on_init = lsp_opts.on_init,
-        filetypes = { 'typescriptreact', 'javascriptreact' },
+        filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
       })
       vim.lsp.enable('biome')
     end
