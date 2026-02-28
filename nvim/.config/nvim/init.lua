@@ -12,6 +12,9 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   group = line_endings_group,
 
   callback = function()
+    if not vim.bo.modifiable then
+      return
+    end
     vim.bo.fileformat = 'unix'
     vim.cmd('silent! %s/\\r$//e')
   end,
