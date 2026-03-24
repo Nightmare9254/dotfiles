@@ -35,9 +35,8 @@ return {
         'emmet_ls',
         'prismals',
         'eslint',
-        'biome@1.9.4',
+        'biome',
         'gopls',
-        'volar',
       },
       automatic_enable = false,
     }

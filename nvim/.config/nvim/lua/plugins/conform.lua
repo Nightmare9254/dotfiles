@@ -31,7 +31,6 @@ return {
       -- },
       formatters_by_ft = (function()
         local result = {}
-        print "test"
         for _, ft in ipairs(format_utils.filetypes_with_dynamic_formatter) do
           result[ft] = format_utils.biome_or_prettier
         end

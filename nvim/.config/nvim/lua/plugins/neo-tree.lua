@@ -59,5 +59,7 @@ return {
     keymap.set('n', '<leader>ec', '<cmd>NvimTreeCollapse<CR>', { desc = '[E]xplorer [C]ollapse' })                    -- collapse file explorer
     keymap.set('n', '\\', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer using [\\]' })                    -- toggle file explorer
     keymap.set('n', '<leader>er', '<cmd>NvimTreeRefresh<CR>', { desc = '[Explorer] [R]efresh' })                      -- refresh file explorer
+    keymap.set('n', '<leader>e=', '<cmd>NvimTreeResize +5<CR>', { desc = '[E]xplorer [=] Increase width' })
+    keymap.set('n', '<leader>e-', '<cmd>NvimTreeResize -5<CR>', { desc = '[E]xplorer [-] Decrease width' })
   end,
 }
