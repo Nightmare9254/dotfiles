@@ -42,9 +42,6 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-# ---- Load shh-agent for git authentications
-eval `keychain --eval ed_github --eval ed_saint-gobain --eval id_opnsense --eval rsa_dhl --eval rsa_ext-molndal --eval rsa_ideo --eval rsa_sigmacode --eval rsa_lotto`
-
 alias pn="pnpm"
 alias pni="pnpm run install"
 alias pnd="pnpm run dev"
@@ -60,6 +57,7 @@ alias jdr="just dev-rebuild"
 alias code="codium"
 alias bnc='brave --disable-web-security --user-data-dir=/tmp/brave-cors'
 alias oc='opencode'
+alias nvim="$HOME/bin/nvim-macos-arm64/bin/nvim"
 
 export API_FOLDER=/home/nightmare/projects/PGNiG/pgnig-ebok-api
 export PROJECT_PATH=/home/nightmare/projects/PGNiG/pgnig-ebok-web
@@ -102,3 +100,9 @@ eval "$(zoxide init zsh)"
 
 # opencode
 export PATH=/home/nightmare/.opencode/bin:$PATH
+
+eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_lotto)"
+eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_dhl)"
+eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_github)"
+eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_sigmacode)"
+
