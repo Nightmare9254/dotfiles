@@ -65,7 +65,19 @@ export API_FOLDER=/home/nightmare/projects/PGNiG/pgnig-ebok-api
 export PROJECT_PATH=/home/nightmare/projects/PGNiG/pgnig-ebok-web
 export API_FILE=/home/nightmare/projects/PGNiG/pgnig-ebok-web/src/services/API.js
 
+autoload -U add-zsh-hook
 
+load-nvmrc() {
+  local nvmrc_path
+  nvmrc_path=$(nvm_find_nvmrc)
+
+  if [ -n "$nvmrc_path" ]; then
+    nvm use
+  fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 # --- Setup volta
 export VOLTA_HOME="$HOME/.volta"
@@ -84,6 +96,7 @@ case ":$PATH:" in
 esac
 # pnpm end
 export PATH=$HOME/.local/bin:$PATH
+export PATH="/opt/homebrew/bin:$PATH"
 
 eval "$(zoxide init zsh)"
 
