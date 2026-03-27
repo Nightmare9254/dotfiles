@@ -24,6 +24,14 @@ If the PRD is not already in your context window, retrieve it using the Linear M
 
 Also fetch comments if relevant so you capture clarifications and design decisions.
 
+PRD validation:
+
+- If the PRD is a Linear **issue**, verify it follows the workspace PRD convention.
+- A valid PRD should either:
+  - have a title starting with `[PRD]`, or
+  - include the label `prd`.
+- If neither condition is true, warn the user that the selected issue does not appear to be a PRD and ask if they still want to proceed.
+
 ### 2. Explore the codebase (optional)
 
 If you have not already explored the codebase, do so to understand the current state of the code.
@@ -77,6 +85,8 @@ If dependency relationships exist between slices, use Linear relationships when 
 
 - Use `blockedBy` for prerequisite slices
 - Use `relatedTo` when slices are logically related but not strict blockers
+- Ensure each slice is linked back to the PRD:
+  - If `parentId` is not used (e.g., PRD stored as a document), add the PRD issue to `relatedTo` so navigation from tasks back to the PRD is easy.
 
 ### 6. Map PRD metadata
 

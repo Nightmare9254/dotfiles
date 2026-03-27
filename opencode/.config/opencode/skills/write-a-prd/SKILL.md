@@ -1,6 +1,6 @@
 ---
 name: write-a-prd
-description: Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
+description: Create a PRD through user interview, codebase exploration, and module design, then submit as a Linear issue or Linear document. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
 ---
 
 This skill will be invoked when the user wants to create a PRD. You may skip steps if you don't consider them necessary.
@@ -17,7 +17,19 @@ A deep module (as opposed to a shallow module) is one which encapsulates a lot o
 
 Check with the user that these modules match their expectations. Check with the user which modules they want tests written for.
 
-5. Once you have a complete understanding of the problem and solution, use the template below to write the PRD. The PRD should be submitted as a GitHub issue.
+5. Once you have a complete understanding of the problem and solution, use the template below to write the PRD. The PRD should be submitted to Linear using the Linear MCP tools.
+
+Submission guidelines:
+
+- Prefer creating the PRD as a **Linear issue** using `linear_save_issue` so it can act as the parent for implementation slices.
+- If the user indicates the PRD should be long-form documentation, create it as a **Linear document** using `linear_create_document`.
+- If created as a Linear issue, attach it to the appropriate **team** and **project** when known.
+- If a project is specified, ensure the PRD issue belongs to that project so downstream tasks inherit context.
+- Optionally assign **priority** and **labels** if the user or repository conventions indicate them.
+- PRDs must be clearly identifiable for filtering:
+  - Prefix the issue title with `[PRD]` (example: `[PRD] Add team-based access control`).
+  - Add a `prd` label if the workspace uses labels.
+  - This ensures PRDs can be easily searched, filtered, and used as parents for implementation tasks.
 
 <prd-template>
 
@@ -72,4 +84,3 @@ A description of the things that are out of scope for this PRD.
 Any further notes about the feature.
 
 </prd-template>
-
