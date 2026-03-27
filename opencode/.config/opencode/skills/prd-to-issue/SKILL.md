@@ -66,10 +66,28 @@ Guidelines:
 
 - Use the slice **Title** as the Linear issue title
 - Put the issue body template below into the issue **description**
-- Set the appropriate **team** or **project** if known
+- Detect and reuse the **team** and **project** from the parent PRD when possible
+- If the PRD is a Linear issue, set `parentId` to the PRD issue ID so all slices appear nested under the PRD
+- If the PRD includes priority, labels, or milestone hints, propagate them to child issues when appropriate
 - Create issues in dependency order (blockers first)
 
 After creating each issue, capture its Linear issue identifier (e.g., `PROJ-456`) so it can be referenced in later slices under "Blocked by".
+
+If dependency relationships exist between slices, use Linear relationships when possible:
+
+- Use `blockedBy` for prerequisite slices
+- Use `relatedTo` when slices are logically related but not strict blockers
+
+### 6. Map PRD metadata
+
+Before creating issues, inspect the PRD and extract useful metadata that should be reused across slices:
+
+- **Team**: infer from the PRD issue or ask the user if unclear
+- **Project**: if the PRD belongs to a Linear project, attach all slices to that project
+- **Labels**: reuse labels such as `backend`, `frontend`, `infra`, `api`, `design`
+- **Priority**: inherit from the PRD unless a slice clearly differs
+
+If any of these are missing or ambiguous, ask the user once before creating issues.
 
 <issue-template>
 ## Parent PRD
