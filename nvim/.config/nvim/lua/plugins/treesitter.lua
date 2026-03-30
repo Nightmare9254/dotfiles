@@ -1,16 +1,17 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  event = { 'BufReadPre', 'BufNewFile' },
+  branch = 'master',
   build = ':TSUpdate',
   dependencies = {
     'windwp/nvim-ts-autotag',
   },
   config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require 'nvim-treesitter.configs'
+    require("nvim-treesitter.install").prefer_git = true
+    vim.opt.runtimepath:append(vim.fn.stdpath("data") .. "/site")
 
-    -- configure treesitter
-    treesitter.setup { -- enable syntax highlighting
+    -- then your normal setup
+    local treesitter = require('nvim-treesitter.configs') -- configure treesitter
+    treesitter.setup {                                    -- enable syntax highlighting
       highlight = {
         enable = true,
       },
