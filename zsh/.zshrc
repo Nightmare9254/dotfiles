@@ -2,10 +2,10 @@
 
 # ---- ZSH HOME -----
 export ZSH=$HOME/.zsh
-
+autoload -Uz compinit && compinit
 # ---- autocompletions ----
 fpath=(~/.zsh/site-functions $fpath)
-autoload -Uz compinit && compinit
+
 
 # ---- Completion options and styling ----
 zstyle ':completion:*' menu select # selectable menu
@@ -59,7 +59,6 @@ alias jdr="just dev-rebuild"
 alias code="codium"
 alias bnc='brave --disable-web-security --user-data-dir=/tmp/brave-cors'
 alias oc='opencode'
-alias nvim="$HOME/bin/nvim-macos-arm64/bin/nvim"
 
 export API_FOLDER=/home/nightmare/projects/PGNiG/pgnig-ebok-api
 export PROJECT_PATH=/home/nightmare/projects/PGNiG/pgnig-ebok-web
@@ -107,4 +106,13 @@ eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_lotto)"
 eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_dhl)"
 eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_github)"
 eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_sigmacode)"
+eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_bilifinger)"
 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# bun completions
+[ -s "/Users/work/.bun/_bun" ] && source "/Users/work/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
