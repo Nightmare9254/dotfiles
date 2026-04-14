@@ -1,18 +1,27 @@
+# WALLPAPERS PATH
 terminal=kitty
-wallDIR="$HOME/Pictures/wallpapers"
+PICTURES_DIR="$(xdg-user-dir PICTURES 2>/dev/null || echo "$HOME/Pictures")"
+wallDIR="$PICTURES_DIR/wallpapers"
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
+# shellcheck source=/dev/null
+. "$SCRIPTSDIR/WallpaperCmd.sh"
 wallpaper_current="$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+wallpaper_link="$HOME/.config/rofi/.current_wallpaper"
 
 # Directory for swaync
 iDIR="$HOME/.config/swaync/images"
 iDIRi="$HOME/.config/swaync/icons"
 
-# swww transition config
+# swww transition config (only when using swww)
 FPS=60
 TYPE="any"
 DURATION=2
 BEZIER=".43,1.19,1,.4"
-SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
+if [[ "$WWW_CMD" == "swww" ]]; then
+  SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
+else
+  SWWW_PARAMS=""
+fi
 
 # Check if package bc exists
 if ! command -v bc &>/dev/null; then
@@ -40,7 +49,7 @@ rofi_override="element-icon{size:${adjusted_icon_size}%;}"
 
 # Kill existing wallpaper daemons for video
 kill_wallpaper_for_video() {
-  swww kill 2>/dev/null
+  "$WWW_CMD" kill 2>/dev/null
   pkill mpvpaper 2>/dev/null
   pkill swaybg 2>/dev/null
   pkill hyprpaper 2>/dev/null
@@ -60,7 +69,19 @@ mapfile -d '' PICS < <(find -L "${wallDIR}" -type f \( \
   -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.mov" -o -iname "*.webm" \) -print0)
 
 RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
-RANDOM_PIC_NAME=". random"
+RANDOM_PIC_NAME="$(basename "$RANDOM_PIC")"
+
+CURRENT_MON_PIC_PATH=$("$WWW_CMD" query 2>/dev/null | grep "$focused_monitor" | awk '{print $NF}')
+if [[ -z "$CURRENT_MON_PIC_PATH" ]]; then
+  if [[ -L "$wallpaper_link" ]]; then
+    CURRENT_MON_PIC_PATH="$(readlink -f "$wallpaper_link")"
+  elif [[ -f "$wallpaper_link" ]]; then
+    CURRENT_MON_PIC_PATH="$wallpaper_link"
+  elif [[ -f "$wallpaper_current" ]]; then
+    CURRENT_MON_PIC_PATH="$wallpaper_current"
+  fi
+fi
+CURRENT_MON_PIC_NAME=$(basename "$CURRENT_MON_PIC_PATH")
 
 # Rofi command
 rofi_command="rofi -i -show -dmenu -config $rofi_theme -theme-str $rofi_override"
@@ -69,7 +90,10 @@ rofi_command="rofi -i -show -dmenu -config $rofi_theme -theme-str $rofi_override
 menu() {
   IFS=$'\n' sorted_options=($(sort <<<"${PICS[*]}"))
 
-  printf "%s\x00icon\x1f%s\n" "$RANDOM_PIC_NAME" "$RANDOM_PIC"
+  printf "%s\x00icon\x1f%s\n" "Random: $RANDOM_PIC_NAME" "$RANDOM_PIC"
+  if [[ -n "$CURRENT_MON_PIC_PATH" ]]; then
+    printf "%s\x00icon\x1f%s\n" "Current: $CURRENT_MON_PIC_NAME" "$CURRENT_MON_PIC_PATH"
+  fi
 
   for pic_path in "${sorted_options[@]}"; do
     pic_name=$(basename "$pic_path")
@@ -88,44 +112,11 @@ menu() {
       fi
       printf "%s\x00icon\x1f%s\n" "$pic_name" "$cache_preview_image"
     else
-      printf "%s\x00icon\x1f%s\n" "$(echo "$pic_name" | cut -d. -f1)" "$pic_path"
+      printf "%s\x00icon\x1f%s\n" "$pic_name" "$pic_path"
     fi
   done
 }
 
-# Offer SDDM Sequioa Wallpaper Option (only for non-video wallpapers)
-set_sddm_wallpaper() {
-  sleep 1
-  sddm_sequoia="/usr/share/sddm/themes/sequoia_2"
-
-  if [ -d "$sddm_sequoia" ]; then
-
-    # Check if yad is running to avoid multiple notifications
-    if pidof yad >/dev/null; then
-      killall yad
-    fi
-
-    if yad --info --text="Set current wallpaper as SDDM background?\n\nNOTE: This only applies to SEQUOIA SDDM Theme" \
-      --text-align=left \
-      --title="SDDM Background" \
-      --timeout=5 \
-      --timeout-indicator=right \
-      --button="yes:0" \
-      --button="no:1"; then
-
-      # Check if terminal exists
-      if ! command -v "$terminal" &>/dev/null; then
-        notify-send -i "$iDIR/error.png" "Missing $terminal" "Install $terminal to enable setting of wallpaper background"
-        exit 1
-      fi
-
-      # Open terminal to enter password
-      $terminal -e bash -c "echo 'Enter your password to set wallpaper as SDDM Background'; \
-            sudo cp -r $wallpaper_current '$sddm_sequoia/backgrounds/default' && \
-            notify-send -i '$iDIR/HUH.png' 'SDDM' 'Background SET'"
-    fi
-  fi
-}
 
 modify_startup_config() {
   local selected_file="$1"
@@ -134,6 +125,7 @@ modify_startup_config() {
   # Check if it's a live wallpaper (video)
   if [[ "$selected_file" =~ \.(mp4|mkv|mov|webm)$ ]]; then
     # For video wallpapers:
+    sed -i '/^\s*exec-once\s*=\s*\$scriptsDir\/WallpaperDaemon\.sh\s*$/s/^/\#/' "$startup_config"
     sed -i '/^\s*exec-once\s*=\s*swww-daemon\s*--format\s*xrgb\s*$/s/^/\#/' "$startup_config"
     sed -i '/^\s*#\s*exec-once\s*=\s*mpvpaper\s*.*$/s/^#\s*//;' "$startup_config"
 
@@ -144,6 +136,7 @@ modify_startup_config() {
     echo "Configured for live wallpaper (video)."
   else
     # For image wallpapers:
+    sed -i '/^\s*#\s*exec-once\s*=\s*\$scriptsDir\/WallpaperDaemon\.sh\s*$/s/^\s*#\s*//;' "$startup_config"
     sed -i '/^\s*#\s*exec-once\s*=\s*swww-daemon\s*--format\s*xrgb\s*$/s/^\s*#\s*//;' "$startup_config"
 
     sed -i '/^\s*exec-once\s*=\s*mpvpaper\s*.*$/s/^/\#/' "$startup_config"
@@ -158,20 +151,27 @@ apply_image_wallpaper() {
 
   kill_wallpaper_for_image
 
-  if ! pgrep -x "swww-daemon" >/dev/null; then
-    echo "Starting swww-daemon..."
-    swww-daemon --format xrgb &
+  if ! pgrep -x "$WWW_DAEMON" >/dev/null; then
+    echo "Starting $WWW_DAEMON..."
+    "$WWW_DAEMON" "${WWW_DAEMON_ARGS[@]}" &
   fi
+  # Wait for daemon to be ready before applying
+  for _ in {1..20}; do
+    "$WWW_CMD" query >/dev/null 2>&1 && break
+    sleep 0.1
+  done
+  "$WWW_CMD" img -o "$focused_monitor" "$image_path" $SWWW_PARAMS || {
+    sleep 0.2
+    "$WWW_CMD" img -o "$focused_monitor" "$image_path" $SWWW_PARAMS
+  }
+  "$WWW_CMD" img -o "$focused_monitor" "$image_path" $SWWW_PARAMS
 
-  swww img -o "$focused_monitor" "$image_path" $SWWW_PARAMS
-
-  # Run additional scripts
-  "$SCRIPTSDIR/WallustSwww.sh"
+  # Run additional scripts (pass the image path to avoid cache race conditions)
+  "$SCRIPTSDIR/WallustSwww.sh" "$image_path"
   sleep 2
   "$SCRIPTSDIR/Refresh.sh"
   sleep 1
 
-  set_sddm_wallpaper
 }
 
 apply_video_wallpaper() {
@@ -193,21 +193,32 @@ main() {
   choice=$(menu | $rofi_command)
   choice=$(echo "$choice" | xargs)
   RANDOM_PIC_NAME=$(echo "$RANDOM_PIC_NAME" | xargs)
+  raw_choice="$choice"
+  choice="${choice#Random: }"
+  choice="${choice#Current: }"
 
   if [[ -z "$choice" ]]; then
     echo "No choice selected. Exiting."
     exit 0
   fi
 
-  # Handle random selection correctly
-  if [[ "$choice" == "$RANDOM_PIC_NAME" ]]; then
-    choice=$(basename "$RANDOM_PIC")
+  # Resolve selection directly when using Random/Current entries
+  if [[ "$raw_choice" == Random:\ * ]]; then
+    selected_file="$RANDOM_PIC"
+  elif [[ "$raw_choice" == Current:\ * && -n "$CURRENT_MON_PIC_PATH" ]]; then
+    selected_file="$CURRENT_MON_PIC_PATH"
+  elif [[ -f "$choice" ]]; then
+    selected_file="$choice"
+  else
+    # Handle random selection by name when needed
+    if [[ "$choice" == "$RANDOM_PIC_NAME" ]]; then
+      choice=$(basename "$RANDOM_PIC")
+    fi
+    choice_basename=$(basename "$choice" | sed 's/\(.*\)\.[^.]*$/\1/')
+
+    # Search for the selected file in the wallpapers directory, including subdirectories
+    selected_file=$(find "$wallDIR" -iname "$choice_basename.*" -print -quit)
   fi
-
-  choice_basename=$(basename "$choice" | sed 's/\(.*\)\.[^.]*$/\1/')
-
-  # Search for the selected file in the wallpapers directory, including subdirectories
-  selected_file=$(find "$wallDIR" -iname "$choice_basename.*" -print -quit)
 
   if [[ -z "$selected_file" ]]; then
     echo "File not found. Selected choice: $choice"
@@ -231,4 +242,3 @@ if pidof rofi >/dev/null; then
 fi
 
 main
-

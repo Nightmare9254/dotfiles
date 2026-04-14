@@ -33,7 +33,7 @@
           "modalities": { "input": ["image", "text"], "output": ["text"] }
         },
         "oss-minimax": {
-          "name": "oss-minimax",␍
+          "name": "oss-minimax",
           "modalities": { "input": ["text"], "output": ["text"] }
         }
       }

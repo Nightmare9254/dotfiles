@@ -6,8 +6,15 @@ window {
 }
 
 mainbox {
-  children:
-    [ "inputbar", "listview"];
+  children: [ "inputbar", "message", "listview" ];
+}
+
+custombox {
+  spacing:                     0px;
+  background-color:            inherit;
+  text-color:                  inherit;
+  orientation:                 vertical;
+  children:                    [ "listview" ];
 }
 
 entry {
@@ -28,10 +35,21 @@ listview {
 element-icon {
   size: 0%;
 }
-
 element-text {
   horizontal-align: 0.0;
   vertical-align: 0.5;
   margin: 0px;
   padding: 0px;
+}
+
+/* ---- Message ---- */
+message {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: inherit;
+}
+
+textbox {
+  text-color: inherit;
+  background-color: inherit;
 }

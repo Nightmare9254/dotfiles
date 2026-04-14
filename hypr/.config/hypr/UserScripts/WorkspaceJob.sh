@@ -1,5 +1,4 @@
 hyprctl dispatch exec "[workspace 2 silent] firefox"
-hyprctl dispatch exec "[workspace 2 silent] brave"
 
 hyprctl dispatch exec "[workspace 6 silent] kitty"
 hyprctl dispatch exec "[workspace 6 silent] remmina"
