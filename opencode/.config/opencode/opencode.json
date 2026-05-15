@@ -20,6 +20,14 @@
           "name": "gpt-codex",
           "modalities": { "input": ["image", "text"], "output": ["text"] }
         },
+        "gpt-5.5": {
+          "name": "gpt-5.5",
+          "modalities": { "input": ["image", "text"], "output": ["text"] }
+        },
+        "gpt-5.4": {
+          "name": "gpt-5.4",
+          "modalities": { "input": ["image", "text"], "output": ["text"] }
+        },
         "gpt-chat": {
           "name": "gpt-chat",
           "modalities": { "input": ["image", "text"], "output": ["text"] }
@@ -34,6 +42,10 @@
         },
         "oss-minimax": {
           "name": "oss-minimax",
+          "modalities": { "input": ["text"], "output": ["text"] }
+        },
+        "oss-kimi": {
+          "name": "oss-kimi",
           "modalities": { "input": ["text"], "output": ["text"] }
         }
       }

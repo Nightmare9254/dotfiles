@@ -71,7 +71,14 @@ load-nvmrc() {
   nvmrc_path=$(nvm_find_nvmrc)
 
   if [ -n "$nvmrc_path" ]; then
-    nvm use
+    local nvmrc_node_version
+    nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
   fi
 }
 
