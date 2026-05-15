@@ -37,6 +37,25 @@
           "modalities": { "input": ["text"], "output": ["text"] }
         }
       }
+    },
+    "omlx": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "oMLX (local MLX)",
+      "options": {
+        "baseURL": "http://127.0.0.1:2137/v1",
+        "apiKey": "9254"
+      },
+      "models": {
+        "Qwen3.5-27B-Claude-4.6-Opus-Distilled-MLX-4bit": {
+          "name": "Qwen 3.5 Opus"
+        },
+        "Qwen3.6-35B-A3B-4bit": {
+          "name": "Qwen 3.6"
+        },
+          "gpt-oss-20b-MXFP4-Q8": {
+          "name": "GPT-OSS 20B"
+        }
+      }
     }
   },
   "mcp": {
