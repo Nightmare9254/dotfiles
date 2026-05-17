@@ -52,11 +52,6 @@
     }
   },
   "mcp": {
-    "linear": {
-      "type": "remote",
-      "url": "https://mcp.linear.app/mcp",
-      "enabled": true
-    },
     "better-auth": {
       "type": "remote",
       "url": "https://mcp.better-auth.com/mcp",
