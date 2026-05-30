@@ -17,14 +17,14 @@
   alternate-urgent-background: #f38ba8;  /* red */
   alternate-urgent-foreground: #1e1e2e;
 
-  selected-active-background: #f38ba8;  /* red */
-  selected-active-foreground: #1e1e2e;
+  selected-active-background: #f5c2e7;
+  selected-active-foreground: #cdd6f4;
 
-  selected-normal-background: #cba6f7;  /* mauve */
-  selected-normal-foreground: #1e1e2e;
+  selected-normal-background: #f5c2e7;
+  selected-normal-foreground: #cdd6f4;
 
-  selected-urgent-background: #f2cdcd;  /* flamingo */
-  selected-urgent-foreground: #1e1e2e;
+  selected-urgent-background: #f5c2e7;
+  selected-urgent-foreground: #cdd6f4;
 
   background-color: #1e1e2e;  /* base */
   background: rgba(30, 30, 46, 0.7); /* base w/ transparency */
