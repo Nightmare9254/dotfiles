@@ -113,6 +113,8 @@ eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_dhl)"
 eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_github)"
 eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_sigmacode)"
 eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_bilifinger)"
+eval "$(ssh-add --apple-use-keychain ~/.ssh/rsa_github_cli)"
+
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
