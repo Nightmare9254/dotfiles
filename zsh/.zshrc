@@ -94,7 +94,7 @@ export PATH=$PATH:/home/nightmare/.tmux/plugins/tmuxifier/bin
 export GOPATH=$HOME/go  
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 # pnpm
-export PNPM_HOME="/home/nightmare/.local/share/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
