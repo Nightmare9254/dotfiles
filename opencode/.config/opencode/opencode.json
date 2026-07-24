@@ -42,20 +42,17 @@
         },
         "oss-minimax": {
           "name": "oss-minimax",
-          "modalities": { "input": ["text"], "output": ["text"] }
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        },
+        "oss-glm": {
+          "name": "oss-glm",
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
         },
         "oss-kimi": {
           "name": "oss-kimi",
           "modalities": { "input": ["text"], "output": ["text"] }
         }
       }
-    }
-  },
-  "mcp": {
-    "better-auth": {
-      "type": "remote",
-      "url": "https://mcp.better-auth.com/mcp",
-      "enabled": true
     }
   }
 }
