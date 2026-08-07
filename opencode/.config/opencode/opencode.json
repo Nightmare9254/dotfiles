@@ -8,49 +8,75 @@
         "baseURL": "https://hub.ideosoftware.com/v1"
       },
       "models": {
-        "claude-opus": {
-          "name": "claude-opus",
-          "modalities": { "input": ["image", "text"], "output": ["text"] }
+        "gpt-5.6-sol": {
+          "name": "gpt-5.6-sol",
+          "modalities": {
+            "input": [
+              "image",
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
         },
-        "claude-sonnet": {
-          "name": "claude-sonnet",
-          "modalities": { "input": ["image", "text"], "output": ["text"] }
+        "gpt-5.6-terra": {
+          "name": "gpt-5.6-terra",
+          "modalities": {
+            "input": [
+              "image",
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
         },
-        "gpt-codex": {
-          "name": "gpt-codex",
-          "modalities": { "input": ["image", "text"], "output": ["text"] }
-        },
-        "gpt-5.5": {
-          "name": "gpt-5.5",
-          "modalities": { "input": ["image", "text"], "output": ["text"] }
+        "gpt-5.6-luna": {
+          "name": "gpt-5.6-luna",
+          "modalities": {
+            "input": [
+              "image",
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
         },
         "gpt-5.4": {
           "name": "gpt-5.4",
-          "modalities": { "input": ["image", "text"], "output": ["text"] }
-        },
-        "gpt-chat": {
-          "name": "gpt-chat",
-          "modalities": { "input": ["image", "text"], "output": ["text"] }
-        },
-        "gpt-mini": {
-          "name": "gpt-mini",
-          "modalities": { "input": ["image", "text"], "output": ["text"] }
-        },
-        "ideo-auto (recommended)": {
-          "name": "ideo-auto (recommended)",
-          "modalities": { "input": ["image", "text"], "output": ["text"] }
-        },
-        "oss-minimax": {
-          "name": "oss-minimax",
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
-        },
-        "oss-glm": {
-          "name": "oss-glm",
-          "modalities": { "input": ["text", "image"], "output": ["text"] }
+          "modalities": {
+            "input": [
+              "image",
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
         },
         "oss-kimi": {
           "name": "oss-kimi",
-          "modalities": { "input": ["text"], "output": ["text"] }
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "oss-glm": {
+          "name": "oss-glm",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
         }
       }
     }
