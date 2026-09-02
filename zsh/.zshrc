@@ -42,7 +42,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # ---- Load shh-agent for git authentications
-eval `keychain --eval rsa_github --eval rsa_dhl --eval rsa_sigmacode --eval rsa_lotto --eval rsa_github_cli`
+eval `keychain --eval rsa_github --eval rsa_dhl --eval rsa_sigmacode --eval rsa_lotto --eval rsa_github_cli --eval rsa_ideo`
 
 alias pn="pnpm"
 alias pni="pnpm run install"
