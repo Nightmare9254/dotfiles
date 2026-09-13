@@ -18,6 +18,10 @@
             "output": [
               "text"
             ]
+          },
+          "cost": {
+            "input": 4,
+            "output": 20
           }
         },
         "gpt-5.6-terra": {
@@ -30,6 +34,10 @@
             "output": [
               "text"
             ]
+          },
+          "cost": {
+            "input": 2,
+            "output": 12
           }
         },
         "gpt-5.6-luna": {
@@ -42,6 +50,10 @@
             "output": [
               "text"
             ]
+          },
+          "cost": {
+            "input": 0.2,
+            "output": 1.2
           }
         },
         "gpt-5.4": {
@@ -54,6 +66,10 @@
             "output": [
               "text"
             ]
+          },
+          "cost": {
+            "input": 2.5,
+            "output": 15
           }
         },
         "oss-kimi": {
@@ -67,8 +83,23 @@
             ]
           },
           "cost": {
-            "input": 3.3,
-            "output": 16.5
+            "input": 3,
+            "output": 15
+          }
+        },
+        "kimi-k3": {
+          "name": "kimi-k3",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "cost": {
+            "input": 3,
+            "output": 15
           }
         },
         "oss-glm": {
@@ -86,8 +117,8 @@
             "output": 4.4
           }
         },
-        "oss-minimax": {
-          "name": "oss-minimax",
+        "glm-5.3": {
+          "name": "glm-5.3",
           "modalities": {
             "input": [
               "text"
@@ -97,59 +128,8 @@
             ]
           },
           "cost": {
-            "input": 0.3,
-            "output": 1.2,
-            "cache_read": 0.03
-          }
-        },
-        "gpt-chat": {
-          "name": "gpt-chat",
-          "modalities": {
-            "input": [
-              "image",
-              "text"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "cost": {
-            "input": 2.5,
-            "output": 15,
-            "cache_read": 0.25
-          }
-        },
-        "gpt-codex": {
-          "name": "gpt-codex",
-          "modalities": {
-            "input": [
-              "image",
-              "text"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "cost": {
-            "input": 1.75,
-            "output": 14,
-            "cache_read": 0.175
-          }
-        },
-        "ideo-auto": {
-          "name": "ideo-auto",
-          "modalities": {
-            "input": [
-              "image",
-              "text"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "cost": {
-            "input": 0,
-            "output": 0
+            "input": 1.4,
+            "output": 4.4
           }
         }
       }
