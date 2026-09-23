@@ -159,6 +159,13 @@ on-mode-changed = []
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
 
+    # Focus monitors
+    alt-left = 'focus-monitor left'
+    alt-right = 'focus-monitor right'
+    # Move window to another monitor
+    alt-ctrl-left = 'move-node-to-monitor left'
+    alt-ctrl-right = 'move-node-to-monitor right'
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
