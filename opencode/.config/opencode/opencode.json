@@ -8,8 +8,8 @@
         "baseURL": "https://hub.ideosoftware.com/v1"
       },
       "models": {
-        "gpt-6-sol": {
-          "name": "gpt-6-sol",
+        "gpt-6.1-sol": {
+          "name": "gpt-6.1-sol",
           "modalities": {
             "input": [
               "image",
@@ -36,39 +36,12 @@
             ]
           },
           "cost": {
-            "input": 0.2,
-            "output": 1.2
-          }
-        },
-        "gemini-3.8-flash": {
-          "name": "gemini-3.8-flash",
-          "modalities": {
-            "input": [
-              "image",
-              "text"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        },
-        "glm-5.3": {
-          "name": "glm-5.3",
-          "modalities": {
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "cost": {
             "input": 1.4,
             "output": 4.4
           }
         },
-        "gpt-5.4": {
-          "name": "gpt-5.4",
+        "gpt-6.1-terra": {
+          "name": "gpt-6.1-terra",
           "modalities": {
             "input": [
               "image",
@@ -79,8 +52,8 @@
             ]
           },
           "cost": {
-            "input": 2.5,
-            "output": 15
+            "input": 0.2,
+            "output": 1.2
           }
         },
         "oss-kimi": {
@@ -112,35 +85,38 @@
             "input": 3,
             "output": 15
           }
+        },
+        "oss-glm": {
+          "name": "oss-glm",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "cost": {
+            "input": 1.4,
+            "output": 4.4
+          }
+        },
+        "glm-5.3": {
+          "name": "glm-5.3",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "cost": {
+            "input": 1.4,
+            "output": 4.4
+          }
         }
       }
-    },
-    "omlx": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "oMLX (local MLX)",
-      "options": {
-        "baseURL": "http://127.0.0.1:2137/v1",
-        "apiKey": "9254"
-      },
-      "models": {
-        "Qwen3.5-27B-Claude-4.6-Opus-Distilled-MLX-4bit": {
-          "name": "Qwen 3.5 Opus"
-        },
-        "Qwen3.6-35B-A3B-4bit": {
-          "name": "Qwen 3.6"
-        },
-        "gpt-oss-20b-MXFP4-Q8": {
-          "name": "GPT-OSS 20B"
-        }
-      }
-    }
-  },
-  "mcp": {
-    "figma": {
-      "type": "remote",
-      "url": "https://mcp.figma.com/mcp",
-      "enabled": true,
-      "oauth": {}
     }
   }
 }
